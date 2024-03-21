@@ -6,40 +6,26 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <div className='footer-container'>
-      <section className='footer-subscription'>
-        <p className='footer-subscription-heading'>
-            Sed ut perspiciatis
-        </p>
-        <p className='footer-subscription-text'>
-        Amet, consectetur adAmet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.ipiscing elit, sed do eiusmod 
-        </p>
+      <section className='footer-subscription'> 
         <Button buttonStyle='btn--outline2'>REGISTER</Button>
       </section>
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>About Us</h2>
-            <Link to='/sign-up'>TempAboutUS</Link>
-            <Link to='/'>TempAboutUS</Link>
-            <Link to='/'>TempAboutUS</Link>
-            <Link to='/'>TempAboutUS</Link>
-            <Link to='/'>TempAboutUS</Link>
+            <Link to='/sign-up'>Contact Info</Link>
+            <Link to='/'>Mission</Link>
+            <Link to='/'>Partners</Link>
+            <Link to='/'>Team</Link>
+            <Link to='/'>Overview</Link>
           </div>
         </div>
-        <div className='footer-link-wrapper'>
+        <div className='footer-link-wrapper'>          
           <div class='footer-link-items'>
-            <h2>Community</h2>
-            <Link to='/'>TempCommunity</Link>
-            <Link to='/'>TempCommunity</Link>
-            <Link to='/'>TempCommunity</Link>
-            <Link to='/'>TempCommunity</Link>
-          </div>
-          <div class='footer-link-items'>
-            <h2>Resources</h2>
-            <Link to='/'>TempResource</Link>
-            <Link to='/'>TempResource</Link>
-            <Link to='/'>TempResource</Link>
-            <Link to='/'>TempResource</Link>
+          <h2>Community</h2>
+          <a href='https://pantry.fieldandfork.ufl.edu/resources/state_national/'>State and National Resources</a>
+          <a href='https://pantry.fieldandfork.ufl.edu/resources/local/'>Local and Campus Resources</a>
+          <a href='https://pantry.fieldandfork.ufl.edu/resources/recipes/'>Recipes Resources</a>
           </div>
         </div>
       </div>

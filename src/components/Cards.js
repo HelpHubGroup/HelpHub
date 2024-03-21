@@ -5,18 +5,17 @@ import CardItem from './CardItem';
 function Cards() {
   return (
     <div className='cards'>
-      <h1>Less waiting, More eating.</h1>
+      <h1>Less Waiting, More Eating</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-  src='../public/images/img-9.jpg'
-              text='Explore the hidden waterfall deep inside the Amazon Jungle'
-              label='Adventure'
-              path='/services'
+              src = "../images/charity_pic.png"
+              text='FIELD & FORK PANTRY'
+              label = 'Organizations'
+              path='https://pantry.fieldandfork.ufl.edu/about/'
             />
             <CardItem
-              src='../public/images/img-2.jpg'
               text='Travel through the Islands of Bali in a Private Cruise'
               label='Luxury'
               path='/services'
