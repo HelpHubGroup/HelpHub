@@ -25,13 +25,16 @@ justify-content: center;
   margin-top: 32px;
 }
 
+
 .hero-btns .btn {
   margin: 6px;
 }
 
+
 .hero-search-icon {
   margin-left: 0.5rem;
   font-size: 1.8rem;
+  
 }
 
 .hero-input {
@@ -55,6 +58,13 @@ justify-content: center;
 .fa-play-circle {
   margin-left: 4px;
 }
+
+.icon-container {
+  border: 1px solid #ccc; /* Add a border around the icon */
+  padding: 5px; /* Add padding to create space around the icon */
+  margin-right: 5px; /* Add margin to create space between input and icon */
+}
+
 
 @media screen and (max-width: 960px) {
   .hero-container > h1 {

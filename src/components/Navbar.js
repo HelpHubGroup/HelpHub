@@ -29,8 +29,8 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-          <i class='fab fa-typo3' />
-          &nbsp;&nbsp;
+          <i class='fas fa-seedling' />
+          &nbsp;
           HELPHUB
           </Link>
           <div className='menu-icon' onClick={handleClick}>
@@ -82,7 +82,6 @@ function Navbar() {
             </li>
           </ul>
           {button && <Button buttonStyle='btn--outline2'>REGISTER</Button>}
-          &nbsp;&nbsp;&nbsp;&nbsp;
           {button && <Button buttonStyle='btn--outline'>LOGIN IN</Button>}  
         </div>
       </nav>

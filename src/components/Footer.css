@@ -34,6 +34,12 @@
   font-size: 20px;
 }
 
+.footer-text {
+  display: flex;
+  align-content: center;
+  margin-bottom: 1rem;
+}
+
 .footer-input {
   padding: 8px 20px;
   border-radius: 2px;

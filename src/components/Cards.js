@@ -16,9 +16,10 @@ function Cards() {
               path='https://pantry.fieldandfork.ufl.edu/about/'
             />
             <CardItem
-              text='Travel through the Islands of Bali in a Private Cruise'
-              label='Luxury'
-              path='/services'
+              src = "../images/img_farm.jpg"
+              path = "https://fieldandfork.ufl.edu/programs/farm-and-gardens/"
+              text='The Origins of Some Items'
+              label='Organizations'
             />
           </ul>
         
