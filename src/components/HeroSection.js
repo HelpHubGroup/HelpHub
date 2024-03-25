@@ -24,18 +24,20 @@ function HeroSection() {
   };
 
   return (
-    <div className = 'hero-container'>
-     <div className='input-areas'>
-          <form>
-            <input
-              className='hero-input'
-              placeholder='SEARCH'
-            />
-            <Button buttonStyle = "btn--outline2">
+    <div className='hero-container'>
+      <div className='input-areas'>
+        <form onSubmit={handleSubmit}>
+          <input
+            className='hero-input'
+            placeholder='SEARCH'
+            value={query}
+            onChange={handleInputChange}
+          />
+          <button type="submit" className='hero-search-icon'>
             <i className="fas fa-search" />
-            </Button>
+          </button>
         </form>
-        </div>
+      </div>
     </div>
   );
 }
