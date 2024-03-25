@@ -12,8 +12,10 @@ function HeroSection() {
               className='hero-input'
               placeholder='SEARCH'
             />
-          <i class='hero-search-icon' />
-          </form>
+            <Button buttonStyle = "btn--outline2">
+            <i className="fas fa-search" />
+            </Button>
+        </form>
         </div>
     </div>
   );

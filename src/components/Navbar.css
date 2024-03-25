@@ -18,6 +18,11 @@
   max-width: 1500px;
 }
 
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-logo {
   color: #556B2F;
   justify-self: start;
@@ -29,7 +34,7 @@
   align-items: center;
 }
 
-.fa-typo3 {
+.fa-seedling {
   margin-left: 0.5rem;
   font-size: 1.8rem;
 }

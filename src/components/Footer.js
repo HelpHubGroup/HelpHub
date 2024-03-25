@@ -7,6 +7,7 @@ function Footer() {
   return (
     <div className='footer-container'>
       <section className='footer-subscription'> 
+        <h2 className='footer-text'>Lets Work Together and build a better Tommorow</h2>
         <Button buttonStyle='btn--outline2'>REGISTER</Button>
       </section>
       <div class='footer-links'>
@@ -32,9 +33,11 @@ function Footer() {
       <section class='social-media'>
         <div class='social-media-wrap'>
           <div class='footer-logo'>
+          &nbsp;
             <Link to='/' className='social-logo'>
+            <i class='fas fa-seedling' />
+            &nbsp;
               HELPHUB
-              <i class='fab fa-typo3' />
             </Link>
           </div>
           <small class='website-rights'>HELPHUB © 2024</small>
