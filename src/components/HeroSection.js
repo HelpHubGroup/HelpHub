@@ -1,35 +1,40 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
 import axios from 'axios';
 
 function HeroSection() {
+  const [query, setQuery] = useState('');
   const [items, setItems] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get('http://localhost:5001/api/items');
-        console.log('Response:', response.data); // Log the response data to the console
-        setItems(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+  
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:5001/api/items?query=${query}`);
+      console.log(response.data);
+      setItems(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-    fetchData();
-  }, []);
+  };
 
   return (
-    <div className = 'hero-container'>
-     <div className='input-areas'>
-          <form>
-            <input
-              className='hero-input'
-              placeholder='SEARCH'
-            />
-          <i class='hero-search-icon' />
-          </form>
-        </div>
+    <div className='hero-container'>
+      <div className='input-areas'>
+        <form onSubmit={handleSubmit}>
+          <input
+            className='hero-input'
+            placeholder='SEARCH'
+            value={query}
+            onChange={handleInputChange}
+          />
+        </form>
+      </div>
     </div>
   );
 }

@@ -16,8 +16,14 @@ app.get('/api/items', async (req, res) => {
     await client.connect();
     const database = client.db("HelpHub");
     const collection = database.collection("Items");
-    const query = { Item_Name: 'Honey Nut Cheerios' };
-    const documents = await collection.find(query).toArray();
+    
+    // Extract query parameter from request
+    const query = req.query.query;
+    
+    // Use the extracted query parameter to filter documents
+    const filter = query ? { Item_Name: query } : {};
+    
+    const documents = await collection.find(filter).toArray();
     res.json(documents);
   } catch (error) {
     console.error('Error fetching data:', error);
