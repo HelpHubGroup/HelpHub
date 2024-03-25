@@ -7,10 +7,16 @@ import axios from 'axios';
 function HeroSection() {
   const [query, setQuery] = useState('');
   const [items, setItems] = useState([]);
-  
+
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
+
+  useEffect(() => {
+    if (items.length > 0) {
+      console.log(items[0].Item_Name);
+    }
+  }, [items]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
