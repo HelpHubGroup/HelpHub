@@ -21,7 +21,7 @@ function HeroSection() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:5001/api/items?query=${query}`);
+      const response = await axios.get(`http://localhost:5001/api/getitems?query=${query}`);
       console.log(response.data);
       setItems(response.data);
     } catch (error) {
