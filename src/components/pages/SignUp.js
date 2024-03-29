@@ -44,9 +44,6 @@ import Button from '../Button';
         <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
       </div>
     </div>
-  
-
-
   )
 }
 
