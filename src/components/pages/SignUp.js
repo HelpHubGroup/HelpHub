@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import '../../App.css';
-import Button from '../Button';
 
-  function SignUp() {
+function SignUp() {
   
-    const[email, setEmail] = useState('')
+    const[UFID, setUFID] = useState('')
+    const[firstName, setFirstName] = useState('')
+    const[lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
-    const [emailError, setEmailError] = useState('')
+    const [confirmPass, setConfirmPass] = useState('')
+    const [UFIDerror, setUFIDerror] = useState('')
     const [passwordError, setPasswordError] = useState('')
+   
   
   
     const onButtonClick = () => {
@@ -17,37 +20,64 @@ import Button from '../Button';
   return (
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
-        <div>Login</div>
+        <div>Sign Up</div>
       </div>
       <br />
       <div className={'inputContainer'}>
         <input
-          value={email}
-          placeholder="Enter your email here"
-          onChange={(ev) => setEmail(ev.target.value)}
+          value={firstName}
+          placeholder="Enter your first name"
+          onChange={(ev) => setFirstName(ev.target.value)}
           className={'inputBox'}
         />
-        <label className="errorLabel">{emailError}</label>
+        <label className="errorLabel">{UFIDerror}</label>
+      </div>
+      <br />
+      <div className={'inputContainer'}>
+        <input
+          value={lastName}
+          placeholder="Enter your last name"
+          onChange={(ev) => setLastName(ev.target.value)}
+          className={'inputBox'}
+        />
+        <label className="errorLabel">{UFIDerror}</label>
+      </div>
+      <br />
+      <div className={'inputContainer'}>
+        <input
+          value={UFID}
+          placeholder="Enter your UFID"
+          onChange={(ev) => setUFID(ev.target.value)}
+          className={'inputBox'}
+        />
+        <label className="errorLabel">{UFIDerror}</label>
       </div>
       <br />
       <div className={'inputContainer'}>
         <input
           value={password}
-          placeholder="Enter your password here"
+          placeholder="Enter your password"
           onChange={(ev) => setPassword(ev.target.value)}
+          className={'inputBox'}
+        />
+        <label className="errorLabel">{passwordError}</label>
+        <br />
+      </div>
+      <div className={'inputContainer'}>
+        <input
+          value={confirmPass}
+          placeholder="Confirm your password"
+          onChange={(ev) => setConfirmPass(ev.target.value)}
           className={'inputBox'}
         />
         <label className="errorLabel">{passwordError}</label>
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
+        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Sign up'} />
       </div>
     </div>
-  
-
 
   )
 }
-
-export default SignUp;
+  export default SignUp;
