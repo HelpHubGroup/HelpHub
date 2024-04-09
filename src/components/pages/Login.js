@@ -3,15 +3,15 @@ import '../../App.css';
 import Button from '../Button';
 
   function Login() {
-  
-    const[email, setEmail] = useState('')
+
+    const[UFID, setUFID] = useState('')
     const [password, setPassword] = useState('')
-    const [emailError, setEmailError] = useState('')
+    const [UFIDerror, setUFIDerror] = useState('')
     const [passwordError, setPasswordError] = useState('')
-  
-  
+
+
     const onButtonClick = () => {
-      
+
     }
 
   return (
@@ -22,12 +22,12 @@ import Button from '../Button';
       <br />
       <div className={'inputContainer'}>
         <input
-          value={email}
-          placeholder="Enter your email here"
-          onChange={(ev) => setEmail(ev.target.value)}
+          value={UFID}
+          placeholder="Enter your UFID here"
+          onChange={(ev) => setUFID(ev.target.value)}
           className={'inputBox'}
         />
-        <label className="errorLabel">{emailError}</label>
+        <label className="errorLabel">{UFIDerror}</label>
       </div>
       <br />
       <div className={'inputContainer'}>
@@ -41,9 +41,12 @@ import Button from '../Button';
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'}/>
+        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
       </div>
     </div>
+
+
+
   )
 }
 
