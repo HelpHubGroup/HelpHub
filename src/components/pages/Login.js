@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../../App.css';
 import Button from '../Button';
 
-  function SignUp() {
+  function Login() {
   
     const[email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -41,10 +41,10 @@ import Button from '../Button';
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
+        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'}/>
       </div>
     </div>
   )
 }
 
-export default SignUp;
+export default Login;
