@@ -8,7 +8,7 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'> 
         <h2 className='footer-text'>Lets Work Together and build a better Tommorow</h2>
-        <Button buttonStyle='btn--outline2'>REGISTER</Button>
+        <Button destination='/sign-up' buttonStyle='btn--outline2'>REGISTER</Button>
       </section>
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
