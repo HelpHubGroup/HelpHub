@@ -7,6 +7,12 @@ import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import Login from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
+import StudentView from './components/pages/StudentView';
+import EmployeeView from './components/pages/EmployeeView';
+import Cart from './components/pages/Cart';
+import { useSelector } from "react-redux";
+
+
 
 import { useEffect, useState } from 'react'
 
@@ -26,6 +32,9 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login setLoggedIn={setLoggedIn} setUFID={setUFID}    />} />
           <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/student' element={<StudentView />} />
+          <Route path='/employee' element={<EmployeeView />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </Router>
     </>
