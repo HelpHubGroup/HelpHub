@@ -7,6 +7,8 @@ import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import Login from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
+import ProductView from './components/pages/ProductView';
+import UserProfilePage from './components/pages/UserProfilePage';
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login setLoggedIn={setLoggedIn} setEmail={setUFID}/>} />
           <Route path='/sign-up' element={<SignUp/>} />
+          <Route path='/product-view' element = {<ProductView/>}/>
+          <Route path='/user-profile' element={<UserProfilePage/>} />
         </Routes>
       </Router>
     </>
