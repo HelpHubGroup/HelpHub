@@ -49,6 +49,11 @@ justify-content: center;
   width: 400px;
 }
 
+.data-result{
+
+  
+}
+
 .hero-input::placeholder {
   color: #b1b1b1;
 }
