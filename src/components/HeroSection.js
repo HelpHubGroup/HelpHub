@@ -4,9 +4,11 @@ import { Button } from './Button';
 import './HeroSection.css';
 import axios from 'axios';
 
+
 function HeroSection() {
   const [query, setQuery] = useState('');
   const [items, setItems] = useState([]);
+  const [results, setResults] = useState([]);
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
@@ -15,6 +17,9 @@ function HeroSection() {
   useEffect(() => {
     if (items.length > 0) {
       console.log(items[0].Item_Name);
+
+      
+
     }
   }, [items]);
 
@@ -22,6 +27,7 @@ function HeroSection() {
     event.preventDefault();
     try {
       const response = await axios.get(`http://localhost:5001/api/getitems?query=${query}`);
+   
       console.log(response.data);
       setItems(response.data);
     } catch (error) {
@@ -42,7 +48,12 @@ function HeroSection() {
           <button type="submit" className='hero-search-icon'>
             <i className="fas fa-search" />
           </button>
+          
         </form>
+      </div>
+      <div className ='data-result'>
+
+
       </div>
     </div>
   );
