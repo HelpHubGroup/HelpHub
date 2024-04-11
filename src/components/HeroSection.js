@@ -45,9 +45,9 @@ function HeroSection() {
             value={query}
             onChange={handleInputChange}
           />
-          <button type="submit" className='hero-search-icon'>
+          <Button type="submit" className='hero-search-icon' destination={'/product-view'}>
             <i className="fas fa-search" />
-          </button>
+          </Button>
           
         </form>
       </div>

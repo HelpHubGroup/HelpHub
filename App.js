@@ -7,6 +7,8 @@ import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
+import ProductView from './components/pages/ProductView';
+import UserProfilePage from './src/components/pages/UserProfilePage';
 
 function App() {
   return (
@@ -19,9 +21,11 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/user-profile' element={<UserProfilePage />} />
+          <Route path='/product-view' element={<ProductView />} />
         </Routes>
       </Router>
-    </>
+    </> 
   );
 }
 
