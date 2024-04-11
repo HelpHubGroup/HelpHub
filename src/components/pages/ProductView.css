@@ -1,0 +1,12 @@
+.ProductViewTableTitle {
+    align-content: center;
+    padding-bottom: 20px;
+    color:#556B2F;
+}
+
+.ProductTable th,
+.ProductTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}

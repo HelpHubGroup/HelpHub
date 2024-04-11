@@ -1,0 +1,56 @@
+.ProfileImgContainer {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    align-items: center;
+    height: 150px; 
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.ProfileImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #556B2F;
+}
+
+.ProfileInfoRight{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    align-content: right;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    font-size: large;
+}
+
+.ProfileInfoLeft{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-content: right;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    font-size: large;
+}
+
+.ProfileTextContainer {
+    padding: 1rem 0 15rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+}
+
+.ProfileName{
+    align-content: center;
+    padding-bottom: 20px;
+    color:#556B2F;
+}
+
+.ProfileBox {
+    border: 3px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
