@@ -41,6 +41,7 @@
 }
 
 .ProfileName{
+    text-align: 'center';
     align-content: center;
     padding-bottom: 20px;
     color:#556B2F;

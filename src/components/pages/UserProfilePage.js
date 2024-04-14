@@ -1,21 +1,22 @@
 import './UserProfilePage.css';
-
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios';
 const UserProfilePage = () => {
   // State to hold user data
-  const [userData, setUserData] = useState(null);
-
+  const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   // Function to fetch user data
+
   const fetchUserData = async () => {
-    try {
-      // Replace 'apiEndpoint' with your actual API endpoint to fetch user data
-      const response = await fetch('apiEndpoint');
-      const data = await response.json();
-      setUserData(data);
+    try {   
+      const response = await axios.get(`http://localhost:5001/api/getuser?query=${"23417264"}`);
+      console.log(response.data);
+      setUserData(response.data);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching user data:', error);
-    }
+      setIsLoading(false);
+    } 
   };
 
   // Fetch user data on component mount
@@ -30,16 +31,22 @@ const UserProfilePage = () => {
             <img className='ProfileImg' alt="Profile" src={"../../images/default_profile_picture.jpg"} />
           </div>
           <div className='ProfileTextContainer'>
-          <h2 className='ProfileName'>{"TEMP NAME"}</h2>
+            {userData.length > 0 ? (
+            <div>
+          <h2 className='ProfileName' style={{textAlign: 'center'}}>{userData[0].First_Name} {userData[0].Last_Name}</h2>
           <table>
             <tbody>
               <tr>
-                <td className='ProfileInfoRight'>Email</td>
-                <td className='ProfileInfoLeft'>{'Loading...'}</td>
+                <td className='ProfileInfoRight'>UFID</td>
+                <td className='ProfileInfoLeft'>{userData[0].UFid}</td>
               </tr>
               <tr>
-                <td className='ProfileInfoRight'>UFID</td>
-                <td className='ProfileInfoLeft'>{"12345678"}</td>
+                <td className='ProfileInfoRight'>Points</td>
+                <td className='ProfileInfoLeft'>{userData[0].Points}</td>
+              </tr>
+              <tr>
+                <td className='ProfileInfoRight'>Phone Number</td>
+                <td className='ProfileInfoLeft'>{userData[0].Phone_Number}</td>
               </tr>
               <tr>
                 <td className='ProfileInfoRight'>Past Carts</td>
@@ -49,6 +56,10 @@ const UserProfilePage = () => {
             </tbody>
           </table>
           </div>
+        ) : (
+          <div>Loading Data..</div>
+        )}
+        </div>
         </div>
     </div>
   );
