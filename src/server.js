@@ -14,6 +14,45 @@ app.use(cors({
 const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Updates user cart
+app.put('/api/update_user/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { Cart } = req.body; // Assuming `cart` is the new array
+
+    // Check if at least one field to update is provided
+    if (!Cart) {
+      return res.status(400).json({ error: 'At least one field to update is required.' });
+    }
+
+    await client.connect();
+    const database = client.db("HelpHub");
+    const collection = database.collection("Customers/Students");
+
+    const filter = { _id: ObjectId(userId) }; // Filter by _id using ObjectId
+    const updateFields = {};
+
+    // Add fields to update if provided
+    if (Cart) {
+      // Set the cart field to the new array value
+      updateFields.Cart = Cart;
+    }
+
+    const result = await collection.updateOne(filter, { $set: updateFields });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    res.json({ message: 'User updated successfully.' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
 // Updates user password, first_name, or last_name
 app.put('/api/update_user/:UFid', async (req, res) => {
   try {
@@ -25,8 +64,8 @@ app.put('/api/update_user/:UFid', async (req, res) => {
     }
 
     await client.connect();
-    const database = client.db("YourDatabaseName");
-    const collection = database.collection("Users");
+    const database = client.db("HelpHub");
+    const collection = database.collection("Customers/Students");
 
     const filter = { UFid: userUFid };
     const updateFields = {};
@@ -124,6 +163,7 @@ app.get('/api/getEmployee', async (req, res) => {
     await client.close();
   }
 });
+
 // Grabs existing user based off UFid
 app.get('/api/getuser', async (req, res) => {
   try {
