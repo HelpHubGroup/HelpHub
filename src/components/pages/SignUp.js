@@ -31,7 +31,7 @@ function SignUp() {
   
       // If all fields are filled and passwords match, proceed to make API call
       try {
-          const response = await axios.post('/api/postuser', {
+          const response = await axios.post('http://localhost:5001/api/postuser', {
               UFID,
               firstName,
               lastName,
