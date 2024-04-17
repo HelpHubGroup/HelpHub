@@ -5,10 +5,12 @@ import HeroSection from '../HeroSection';
 import Cards2 from '../Cards2';
 import Footer from '../Footer';
 
-function Home() {
+
+
+function Home({setResults}) {
   return (
     <>
-      <HeroSection />
+      <HeroSection setResults={setResults}/>
       <Cards />
       <Cards2 />
       <Footer />

@@ -1,7 +1,7 @@
 import './UserProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const UserProfilePage = () => {
+const UserProfilePage = ({UFID}) => {
   // State to hold user data
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +9,7 @@ const UserProfilePage = () => {
 
   const fetchUserData = async () => {
     try {   
-      const response = await axios.get(`http://localhost:5001/api/getuser?query=${"23417264"}`);
+      const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
       console.log(response.data);
       setUserData(response.data);
       setIsLoading(false);
@@ -38,7 +38,7 @@ const UserProfilePage = () => {
             <tbody>
               <tr>
                 <td className='ProfileInfoRight'>UFID</td>
-                <td className='ProfileInfoLeft'>{userData[0].UFid}</td>
+                <td className='ProfileInfoLeft'>{userData[0].UFID}</td>
               </tr>
               <tr>
                 <td className='ProfileInfoRight'>Points</td>

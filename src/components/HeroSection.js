@@ -5,10 +5,10 @@ import './HeroSection.css';
 import axios from 'axios';
 
 
-function HeroSection() {
+function HeroSection({setResults}) {
   const [query, setQuery] = useState('');
   const [items, setItems] = useState([]);
-  const [results, setResults] = useState([]);
+  
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
@@ -30,6 +30,7 @@ function HeroSection() {
    
       console.log(response.data);
       setItems(response.data);
+      setResults(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -46,6 +47,8 @@ function HeroSection() {
             onChange={handleInputChange}
           />
           <Button type="submit" className='hero-search-icon' destination={'/product-view'}>
+           
+           
             <i className="fas fa-search" />
           </Button>
           

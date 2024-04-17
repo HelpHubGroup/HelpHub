@@ -15,20 +15,21 @@ function App() {
   // initialize the variables for user login
   // and email globally
   const [loggedIn, setLoggedIn] = useState(false)
-  const [UFID, setUFID] = useState('')
+  const [results, setResults] = useState([]);
 
+ 
   return (
     <>
       <Router>
         <Navbar />
         <Routes>
-        <Route path='/' exact element={ <Home />}/>
+        <Route path='/' exact element={ <Home setResults={setResults}/>}/>
           <Route path='/services' element={<Services />} /> 
           <Route path='/products' element={<Products />} />
-          <Route path='/login' element={<Login setLoggedIn={setLoggedIn} setEmail={setUFID}/>} />
+          <Route path='/login' element={<Login  />}/>
           <Route path='/sign-up' element={<SignUp/>} />
-          <Route path='/product-view' element = {<ProductView/>}/>
-          <Route path='/user-profile' element={<UserProfilePage/>} />
+          <Route path='/product-view' element = {<ProductView results={results}/>}/>
+          <Route path='/user-profile' element={<UserProfilePage />} />
         </Routes>
       </Router>
     </>
