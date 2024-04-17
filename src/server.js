@@ -152,7 +152,6 @@ app.post('/api/postuser', async (req, res) => {
   }
 });
 
-
 // Gets Employee based off Employee_id
 app.get('/api/getEmployee', async (req, res) => {
   try {
@@ -233,6 +232,27 @@ app.get('/api/get_allrelateditems', async (req, res) => {
     
     // Use text search for similar worded items
     const documents = await collection.find({ $text: { $search: query } }).toArray();
+    
+    res.json(documents);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
+// returns an array of items that match Food_Group
+app.get('/api/get_allfood_Groupitems', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db("HelpHub");
+    const collection = database.collection("Items");
+    
+    const query = req.query.query;
+    
+    // Find documents with the exact same Food_Group
+    const documents = await collection.find({ Food_Group: query }).toArray();
     
     res.json(documents);
   } catch (error) {
