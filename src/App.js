@@ -27,7 +27,6 @@ function App() {
         <Routes>
         <Route path='/' exact element={ <Home setResults={setResults}/>}/>
           <Route path='/services' element={<Services />} /> 
-          <Route path='/employee' element={<Employee />} /> 
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login  />}/>
           <Route path='/sign-up' element={<SignUp/>} />
