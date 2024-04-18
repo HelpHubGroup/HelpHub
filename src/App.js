@@ -10,6 +10,7 @@ import SignUp from './components/pages/SignUp';
 import ProductView from './components/pages/ProductView';
 import UserProfilePage from './components/pages/UserProfilePage';
 import Employee from './components/pages/Employee';
+import EmployeeLogin from './components/pages/EmployeeLogin';
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />
+          <Route path='/employee-login' element={<EmployeeLogin />} />
+          <Route path='/employee' element={<Employee />} />
         </Routes>
       </Router>
     </>

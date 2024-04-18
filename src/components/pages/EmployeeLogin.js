@@ -4,73 +4,64 @@ import Button from '../Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-  function Login() {
+  function EmployeeLogin({onLogin}) {
 
-    const[UFID, setUFID] = useState('')
+    const[employeeID, setEmployeeID] = useState('')
     const [password, setPassword] = useState('')
-    const [UFIDerror, setUFIDerror] = useState('')
+    const [IDerror, setIDerror] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [loginStatus, setLoginStatus] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [employee, setEmployee] = useState(false);
 
     const handleLogin = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.get(`http://localhost:5001/api/getuser?query=${(UFID)}`);
+        const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${(employeeID)}`);
         const user = response.data[0];
         if (!user || user.password !== password){
           localStorage.clear()
-          localStorage.setItem('UFID', UFID);
+          localStorage.setItem('employeeID', employeeID);
           setLoginStatus('Login successful!');
           setIsLoggedIn(true);
+          onLogin({employeeID});
           console.log(localStorage.getItem(Object.keys(localStorage)[0]));
-          
         } else {
-          setIsLoggedIn(false);
           setLoginStatus('Invalid credentials. Please try again.');
         }
         
        
          
       } catch (error) {
-        setIsLoggedIn(false);
         console.error('Error logging in:', error);
         setLoginStatus('An error occurred. Please try again later.');
       }
     };
 
-    const handleEmployee = async (e) => {
-      setEmployee(true);
-       
-    };
 
     if(isLoggedIn){
-      return <Navigate to='/user-profile'  />
+      return <Navigate to='/employee'  />
     } 
-    if(employee){
-      return <Navigate to='/employee-login'  />
-    } 
+   
   return (
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
-        <div>Login</div>
+        <div>Employee Login</div>
       </div>
       <br />
       <div className={'inputContainer'}>
         <input
-          value={UFID}
-          placeholder="Enter your UFID here"
-          onChange={(ev) => setUFID(ev.target.value)}
+          value={employeeID}
+          placeholder="Enter ID here"
+          onChange={(ev) => setEmployeeID(ev.target.value)}
           className={'inputBox'}
         />
-        <label className="errorLabel">{UFIDerror}</label>
+        <label className="errorLabel">{IDerror}</label>
       </div>
       <br />
       <div className={'inputContainer'}>
         <input
           value={password}
-          placeholder="Enter your password here"
+          placeholder="Enter password here"
           onChange={(ev) => setPassword(ev.target.value)}
           className={'inputBox'}
         />
@@ -80,7 +71,7 @@ import { Navigate } from 'react-router-dom';
       <div className={'inputContainer'}>
         <input className={'login'} type="button" onClick={handleLogin} value={'Log in'} />
         <br />
-        <input className={'employee'} type="button" onClick={handleEmployee} value={'Click here if you are an Employee'} />
+        
         
       </div>
       <div>
@@ -93,4 +84,4 @@ import { Navigate } from 'react-router-dom';
   )
 }
 
-export default Login;
+export default EmployeeLogin;
