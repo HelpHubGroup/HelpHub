@@ -124,6 +124,7 @@ app.get('/api/getEmployee', async (req, res) => {
     await client.close();
   }
 });
+
 // Grabs existing user based off UFid
 app.get('/api/getuser', async (req, res) => {
   try {
