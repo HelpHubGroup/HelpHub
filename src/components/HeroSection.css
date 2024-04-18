@@ -50,15 +50,22 @@ justify-content: center;
 }
 
 .data-result{
-
-  
+  border: none;
 }
 
 .hero-input::placeholder {
   color: #b1b1b1;
 }
 
-
+.loading-text,
+.not-found-text {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: #556B2F;
+}
 
 .fa-play-circle {
   margin-left: 4px;

@@ -11,6 +11,7 @@ import ProductView from './components/pages/ProductView';
 import UserProfilePage from './components/pages/UserProfilePage';
 import Employee from './components/pages/Employee';
 import EmployeeLogin from './components/pages/EmployeeLogin';
+import UserView from './components/pages/UserView';
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path='/user-profile' element={<UserProfilePage />} />
           <Route path='/employee-login' element={<EmployeeLogin />} />
           <Route path='/employee' element={<Employee />} />
+          <Route path='/user-view' element={<UserView />} />
         </Routes>
       </Router>
     </>
