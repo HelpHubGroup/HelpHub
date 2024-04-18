@@ -38,21 +38,14 @@ function Employee() { {
             <table>
               <tbody>
                 <tr>
-                  <td className='ProfileInfoRight'>UFID</td>
-                  <td className='ProfileInfoLeft'>{userData[0].UFID}</td>
+                  <td className='ProfileInfoRight'>Employee ID</td>
+                  <td className='ProfileInfoLeft'>{userData[0].Employee_id}</td>
                 </tr>
                 <tr>
-                  <td className='ProfileInfoRight'>Points</td>
-                  <td className='ProfileInfoLeft'>{userData[0].Points}</td>
+                  <td className='ProfileInfoRight'>Email</td>
+                  <td className='ProfileInfoLeft'>{userData[0].email}</td>
                 </tr>
-                <tr>
-                  <td className='ProfileInfoRight'>Phone Number</td>
-                  <td className='ProfileInfoLeft'>{userData[0].Phone_Number}</td>
-                </tr>
-                <tr>
-                  <td className='ProfileInfoRight'>Past Carts</td>
-                  <td className='ProfileInfoLeft'>{"Link to carts"}</td>
-                </tr>
+          
                
               </tbody>
             </table>
@@ -61,7 +54,7 @@ function Employee() { {
             <div>Loading Data..</div>
           )}
           </div>
-          </div>
+          </div>  
       </div>
     );
   };
