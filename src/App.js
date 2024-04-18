@@ -9,6 +9,7 @@ import Login from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
 import ProductView from './components/pages/ProductView';
 import UserProfilePage from './components/pages/UserProfilePage';
+import Employee from './components/pages/Employee';
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Routes>
         <Route path='/' exact element={ <Home setResults={setResults}/>}/>
           <Route path='/services' element={<Services />} /> 
+          <Route path='/employee' element={<Employee />} /> 
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login  />}/>
           <Route path='/sign-up' element={<SignUp/>} />

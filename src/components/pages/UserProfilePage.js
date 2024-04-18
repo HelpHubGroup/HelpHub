@@ -1,6 +1,7 @@
 import './UserProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 const UserProfilePage = ({UFID}) => {
   // State to hold user data
   const [userData, setUserData] = useState([]);

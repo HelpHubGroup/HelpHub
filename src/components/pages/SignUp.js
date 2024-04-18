@@ -112,7 +112,7 @@ function SignUp() {
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Sign up'} />
+        <input className={'login'} type="button" onClick={onButtonClick} value={'Sign up'} />
       </div>
     </div>
 

@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom';
     const [passwordError, setPasswordError] = useState('')
     const [loginStatus, setLoginStatus] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [employee, setEmployee] = useState(false);
 
     const handleLogin = async (e) => {
       e.preventDefault();
@@ -37,8 +38,16 @@ import { Navigate } from 'react-router-dom';
       }
     };
 
+    const handleEmployee = async (e) => {
+      setEmployee(true);
+       
+    };
+
     if(isLoggedIn){
       return <Navigate to='/user-profile'  />
+    } 
+    if(employee){
+      return <Navigate to='/'  />
     } 
   return (
     <div className={'mainContainer'}>
@@ -67,10 +76,13 @@ import { Navigate } from 'react-router-dom';
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={handleLogin} value={'Log in'} />
-        <div>
+        <input className={'login'} type="button" onClick={handleLogin} value={'Log in'} />
+        <br />
+        <input className={'employee'} type="button" onClick={handleEmployee} value={'Click here if you are an Employee'} />
+        
+      </div>
+      <div>
         {loginStatus && <div className="popup">{loginStatus}</div>}
-        </div>
       </div>
     </div>
 
