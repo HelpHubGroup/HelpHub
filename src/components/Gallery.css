@@ -1,0 +1,25 @@
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(4, 2fr); /* 2 row x 4 column grid */
+  }
+  
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gallery-image {
+    width: 100px; /* Set the image width */
+    height: 100px; /* Set the image height */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  .category-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+  }
+  
