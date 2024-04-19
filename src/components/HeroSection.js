@@ -14,7 +14,9 @@ function HeroSection({ onSearch}) {
   const handleSearch = async () => {
     setSearching(true);
     try {
-      const response = await axios.get(`http://localhost:5001/api/getitems?query=${query}`);
+      console.log(query);
+      const response = await axios.get(`http://localhost:5001/api/get_allrelateditems?query=${query}`);
+      console.log("Results: ", response.data);
       onSearch(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);

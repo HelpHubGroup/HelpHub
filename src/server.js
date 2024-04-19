@@ -212,6 +212,7 @@ app.get('/api/getitems', async (req, res) => {
     const filter = query ? { Item_Name: query } : {};
     
     const documents = await collection.find(filter).toArray();
+
     res.json(documents);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -225,13 +226,21 @@ app.get('/api/getitems', async (req, res) => {
 app.get('/api/get_allrelateditems', async (req, res) => {
   try {
     await client.connect();
+    console.log("Connected to MongoDB");
+    
     const database = client.db("HelpHub");
     const collection = database.collection("Items");
     
     const query = req.query.query;
+    console.log("Query:", query);
     
-    // Use text search for similar worded items
-    const documents = await collection.find({ $text: { $search: query } }).toArray();
+    // Construct a regex pattern to match similar words
+    const regex = new RegExp(query, 'i'); // 'i' flag for case-insensitive search
+    
+    // Search for items with Item_Name matching the regex pattern
+    const documents = await collection.find({ Item_Name: { $regex: regex } }).toArray();
+    
+    console.log("Documents found:", documents);
     
     res.json(documents);
   } catch (error) {
@@ -239,8 +248,11 @@ app.get('/api/get_allrelateditems', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   } finally {
     await client.close();
+    console.log("MongoDB connection closed");
   }
 });
+
+
 
 // returns an array of items that match Food_Group
 app.get('/api/get_allfood_Groupitems', async (req, res) => {
