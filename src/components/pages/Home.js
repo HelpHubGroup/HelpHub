@@ -7,10 +7,10 @@ import Footer from '../Footer';
 
 
 
-function Home({setResults}) {
+function Home() {
   return (
     <>
-      <HeroSection setResults={setResults}/>
+      <HeroSection />
       <Cards />
       <Cards2 />
       <Footer />

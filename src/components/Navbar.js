@@ -3,9 +3,12 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar(props) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [cartVisible, setCartVisible] = useState(false);
+  const [cartFoods, setCartFoods] = useState([]);
+
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -17,6 +20,8 @@ function Navbar() {
       setButton(true);
     }
   };
+
+  
 
   useEffect(() => {
     showButton();
@@ -83,6 +88,7 @@ function Navbar() {
           </ul>
           {button && <Button buttonStyle='btn--outline2' destination='/sign-up' >REGISTER</Button>}
           {button && <Button buttonStyle='btn--outline'destination='/login'>LOGIN IN</Button>}  
+          {props.loggedIn && <img src=''/>}
         </div>
       </nav>
     </>

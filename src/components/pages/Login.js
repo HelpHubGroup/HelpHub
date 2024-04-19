@@ -4,7 +4,7 @@ import Button from '../Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-  function Login() {
+  function Login({changeLoginStatus}) {
 
     const[UFID, setUFID] = useState('')
     const [password, setPassword] = useState('')
@@ -23,11 +23,13 @@ import { Navigate } from 'react-router-dom';
           localStorage.clear()
           localStorage.setItem('UFID', UFID);
           setLoginStatus('Login successful!');
+          changeLoginStatus(true);
           setIsLoggedIn(true);
           console.log(localStorage.getItem(Object.keys(localStorage)[0]));
           
         } else {
           setIsLoggedIn(false);
+          changeLoginStatus(false);
           setLoginStatus('Invalid credentials. Please try again.');
         }
         
@@ -35,6 +37,7 @@ import { Navigate } from 'react-router-dom';
          
       } catch (error) {
         setIsLoggedIn(false);
+        changeLoginStatus(true);
         console.error('Error logging in:', error);
         setLoginStatus('An error occurred. Please try again later.');
       }
