@@ -15,7 +15,7 @@ const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.n
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Updates user cart
-app.put('/api/update_cart/:UFID', async (req, res) => {
+app.put('/api/update_cart/:UFid', async (req, res) => {
   try {
     const userUFid = req.params.UFID;
     console.log(userUFid);
@@ -270,6 +270,30 @@ app.get('/api/get_allfood_Groupitems', async (req, res) => {
     console.error('Error fetching data:', error);
     res.status(500).json({ error: 'Internal server error' });
   } finally {
+    await client.close();
+  }
+});
+
+// returns a array of all orders in the database
+app.get('/api/getallorders', async (req, res) => {
+  try {
+    // Connect to MongoDB client
+    await client.connect();
+    
+    const database = client.db("HelpHub");
+    const collection = database.collection("Items");
+    
+    // No need for a filter when returning all items
+    const documents = await collection.find({}).toArray();
+
+    // Respond with a success status and data
+    res.json({ success: true, data: documents });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    // Respond with an error status and message
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  } finally {
+    // Close MongoDB client connection
     await client.close();
   }
 });
