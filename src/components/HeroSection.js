@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 
-function HeroSection({ onSearch}) {
+function HeroSection({ onSearch }) {
   const [query, setQuery] = useState('');
   const [searching, setSearching] = useState('');
 
