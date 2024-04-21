@@ -4,23 +4,15 @@ import HeroSection from '../HeroSection';
 import axios from 'axios';
 
 function Orders() {
-  const categories = [
-    { name: 'Fruit', image: 'img-fruit.png' },
-    { name: 'Vegetable', image: 'img-vegetable.png' },
-    { name: 'Grains', image: 'img-grain.png' },
-    { name: 'Condiment', image: 'img-condiment.png' },
-    { name: 'Oil', image: 'img-oil.png' },
-    { name: 'Nuts', image: 'img-nuts.png' },
-    { name: 'Protein', image: 'img-protein.png' },
-    { name: 'Beans', image: 'img-beans.png' }
-  ];
+ 
 
-  const [items, setItems] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
 
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
+  const [cantGet, setCantGet] = useState(false);
 
 
   useEffect(() => { 
@@ -28,13 +20,16 @@ function Orders() {
         setLoading(true);
         try {
           const response = await axios.get('http://localhost:5001/api/getallorders');
-          setOrders(response.data[0]);
+          setOrders(response.data);
           console.log(orders);
-            setLoading(false);
+          setCantGet(false);
+          setLoading(false);
           } catch (err) {
             setError(err.message);
             setLoading(false);
             console.log(err);
+            setCantGet(true);
+            
         }
       };
     
@@ -45,6 +40,9 @@ function Orders() {
 
   if (loading) {
     return <p className='loading-text'>Loading...</p>;
+  }
+  if(cantGet){
+    return <p className = 'loading-text'>Error obtaining the orders</p>
   }
 
 
@@ -65,10 +63,22 @@ function Orders() {
             </tr>
           </thead>
           <tbody>
-                {orders.map(order => (
-                <li key={order._id}>{order.name} - {order.quantity}</li>
-                ))}
             
+            {(() => {
+            const rows = [];
+            for (let i = 0; i < orders.length; i++) {
+                const order = orders[i];
+                rows.push(
+                <tr key={i}>
+                    <td>{i + 1}</td> {/* Adding 1 to index to display order number */}
+                    <td>{order[0]}</td> {/* Assuming first attribute is item name */}
+                    <td>{order[1]}</td> {/* Assuming second attribute is quantity */}
+                </tr>
+          );
+        }
+        return rows;
+      })()}
+                
           </tbody>
         </table>
       
