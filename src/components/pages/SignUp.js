@@ -13,6 +13,7 @@ function SignUp() {
     const [UFIDerror, setUFIDerror] = useState('')
     const [lastNameError, setLastNameError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const [signUpStatus, setSignUpStatus] = useState('');
 
 
 
@@ -47,12 +48,21 @@ function SignUp() {
               setUFIDerror('');
               setLastNameError('');
               setPasswordError('');
-              console.log('User signed up successfully');
+              setSignUpStatus('User signed up successfully');
           } else {
-              console.error('Error signing up:', response.statusText);
+            console.log('Error signing up:', response.statusText);
+            setSignUpStatus('Error signing up.');
           }
       } catch (error) {
-          console.error('Error signing up:', error);
+        if(error.response.status == 400){
+          setSignUpStatus('User with the same UFID already exists');
+        } else{
+          console.log('Error signing up:', error);
+          setSignUpStatus('Error signing up');
+        }
+        
+      
+        
       }
     }
   return (
@@ -113,6 +123,9 @@ function SignUp() {
       <br />
       <div className={'inputContainer'}>
         <input className={'login'} type="button" onClick={onButtonClick} value={'Sign up'} />
+      </div>
+      <div>
+        {signUpStatus && <div className="popup">{signUpStatus}</div>}
       </div>
     </div>
 
