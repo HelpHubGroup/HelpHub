@@ -46,6 +46,7 @@ function UpdateInfo() {
   
       // If all fields are filled and passwords match, proceed to make API call
       try {
+        console.log(UFID);
         const response = await axios.put(`http://localhost:5001/api/update_user`, {
         UFID: UFID,
         firstName: firstName,
