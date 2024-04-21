@@ -275,6 +275,30 @@ app.get('/api/get_allfood_Groupitems', async (req, res) => {
   }
 });
 
+// returns a array of all orders in the database
+app.get('/api/getallorders', async (req, res) => {
+  try {
+    // Connect to MongoDB client
+    await client.connect();
+    
+    const database = client.db("HelpHub");
+    const collection = database.collection("Items");
+    
+    // No need for a filter when returning all items
+    const documents = await collection.find({}).toArray();
+
+    // Respond with a success status and data
+    res.json({ success: true, data: documents });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    // Respond with an error status and message
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  } finally {
+    // Close MongoDB client connection
+    await client.close();
+  }
+});
+
 // Listens for request from the frontend
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
