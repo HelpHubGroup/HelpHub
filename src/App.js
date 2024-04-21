@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Navbar2 from './components/Navbar2';
 import './App.css';
 import Home from './components/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -33,7 +34,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar loggedIn = {loggedIn}/>
+        {loggedIn ? <Navbar loggedIn={loggedIn} /> : <Navbar2 loggedIn={loggedIn} />}
         <Routes>
         <Route path='/' exact element={ <Home />}/>
           <Route path='/services' element={<Services />} />
