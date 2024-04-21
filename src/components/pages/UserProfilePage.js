@@ -1,13 +1,13 @@
 import './UserProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const UserProfilePage = ({UFID}) => {
   // State to hold user data
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // Function to fetch user data
-
+ // const [clicked, setClicked] = useState(false);
   const fetchUserData = async () => {
     try {   
       const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
@@ -24,6 +24,12 @@ const UserProfilePage = ({UFID}) => {
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  const handleClick = async (e) => {
+    //setClicked(true);
+     
+  };
+
 
   return (
     <div>
@@ -53,6 +59,10 @@ const UserProfilePage = ({UFID}) => {
                 <td className='ProfileInfoRight'>Past Carts</td>
                 <td className='ProfileInfoLeft'>{"Link to carts"}</td>
               </tr>
+              <div>
+              <input className={'login'} type="button" onClick={handleClick} value={'Access Menu'} />
+
+              </div>
              
             </tbody>
           </table>

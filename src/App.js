@@ -20,16 +20,22 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [results, setResults] = useState([]);
 
+  const changeLoginStatus = (status) => {
+    setLoggedIn(status);
+  }
+
+
+
  
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar loggedIn = {loggedIn}/>
         <Routes>
-        <Route path='/' exact element={ <Home setResults={setResults}/>}/>
+        <Route path='/' exact element={ <Home />}/>
           <Route path='/services' element={<Services />} /> 
           <Route path='/products' element={<Products />} />
-          <Route path='/login' element={<Login  />}/>
+          <Route path='/login' element={<Login changeLoginStatus ={changeLoginStatus} />}/>
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />

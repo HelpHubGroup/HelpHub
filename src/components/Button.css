@@ -24,6 +24,15 @@
   transition: all 0.3s ease-out;
 }
 
+.btn--cart {
+  background-color: #FFF8DC;
+  color: #556B2F;
+  padding: 8px 20px;
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease-out;
+  
+}
+
 .btn--outline2 {
   background-color: #FFF8DC;
   color: #556B2F;
@@ -49,3 +58,5 @@
   color: #CD5C5C;
   transition: 250ms;
 }
+
+

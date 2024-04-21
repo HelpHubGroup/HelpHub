@@ -3,9 +3,12 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar(props) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [cartVisible, setCartVisible] = useState(false);
+  const [cartFoods, setCartFoods] = useState([]);
+
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -18,6 +21,8 @@ function Navbar() {
     }
   };
 
+  
+
   useEffect(() => {
     showButton();
   }, []);
@@ -28,6 +33,7 @@ function Navbar() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
+        
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           <i class='fas fa-seedling' />
           &nbsp;
@@ -36,7 +42,16 @@ function Navbar() {
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
+          <div className='cart-icon'>
+            
+          
+              <img src="../images/cart.png" alt="Cart" className='btn--image'/>
+              
+             
+                
+          </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            
             <li className='nav-item'>
               <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Home
@@ -82,7 +97,11 @@ function Navbar() {
             </li>
           </ul>
           {button && <Button buttonStyle='btn--outline2' destination='/sign-up' >REGISTER</Button>}
-          {button && <Button buttonStyle='btn--outline'destination='/login'>LOGIN IN</Button>}  
+          {button && <Button buttonStyle='btn--outline'destination='/login'>LOGIN IN</Button>} 
+          <br />
+          {button && <Button buttonStyle='btn--outline'destination='/user-view'>Menu</Button>} 
+      
+          {props.loggedIn && <img src=''/>}
         </div>
       </nav>
     </>
