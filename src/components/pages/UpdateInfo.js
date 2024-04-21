@@ -20,7 +20,7 @@ function UpdateInfo() {
         const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
         console.log(response.data);
         setUserData(response.data);
-        setUFID(userData[0].UFID)
+        setUFID(response.data[0].UFID)
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error);
