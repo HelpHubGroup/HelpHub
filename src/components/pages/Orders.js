@@ -28,7 +28,7 @@ function Orders() {
         setLoading(true);
         try {
           const response = await axios.get('http://localhost:5001/api/getallorders');
-          setOrders(response.data[0]);
+          setOrders(response.data.orders);
           console.log(orders);
             setLoading(false);
           } catch (err) {
