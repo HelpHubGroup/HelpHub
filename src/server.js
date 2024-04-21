@@ -279,7 +279,7 @@ app.get('/api/getallorders', async (req, res) => {
     await client.connect();
     
     const database = client.db("HelpHub");
-    const collection = database.collection("Items");
+    const collection = database.collection("Orders");
     
     // No need for a filter when returning all items
     const documents = await collection.find({}).toArray();
