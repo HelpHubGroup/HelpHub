@@ -5,6 +5,11 @@
   font-family: 'PT Sans', sans-serif;
 }
 
+.update_info_warning{
+  font-size: 20px;
+  color:red;
+}
+
 .home,
 .services,
 .products,

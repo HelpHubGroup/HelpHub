@@ -2,6 +2,7 @@ import './UserProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { Button } from '../Button';
 
 const UserProfilePage = ({UFID}) => {
   // State to hold user data
@@ -25,19 +26,13 @@ const UserProfilePage = ({UFID}) => {
     fetchUserData();
   }, []);
 
-  const handleClick = async (e) => {
-    //setClicked(true);
-     
-  };
-
-
   return (
     <div>
         <div className='ProfileBox'>
-          <div className="ProfileImgContainer">
-            <img className='ProfileImg' alt="Profile" src={"../../images/default_profile_picture.jpg"} />
-          </div>
           <div className='ProfileTextContainer'>
+            <div className="ProfileImgContainer">
+              <img className='ProfileImg' alt="Profile" src={"../../images/default_profile_picture.jpg"} />
+            </div>
             {userData.length > 0 ? (
             <div>
           <h2 className='ProfileName' style={{textAlign: 'center'}}>{userData[0].First_Name} {userData[0].Last_Name}</h2>
@@ -59,18 +54,17 @@ const UserProfilePage = ({UFID}) => {
                 <td className='ProfileInfoRight'>Past Carts</td>
                 <td className='ProfileInfoLeft'>{"Link to carts"}</td>
               </tr>
-              <div>
-              <input className={'login'} type="button" onClick={handleClick} value={'Access Menu'} />
-
-              </div>
-             
             </tbody>
           </table>
+          <div className={'buttons-container'}>
+          <Button destination='/update-info' buttonStyle='btn--outline2'>UPDATE</Button>
+          <Button destination='/delete-info' buttonStyle='btn--outline2'>DELETE</Button>
+          </div>
           </div>
         ) : (
           <div>Loading Data..</div>
         )}
-        </div>
+        </div>  
         </div>
     </div>
   );
