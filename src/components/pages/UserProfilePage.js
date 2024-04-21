@@ -64,7 +64,7 @@ const UserProfilePage = ({UFID}) => {
         ) : (
           <div>Loading Data..</div>
         )}
-        </div>
+        </div>  
         </div>
     </div>
   );

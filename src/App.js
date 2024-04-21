@@ -14,7 +14,7 @@ import EmployeeLogin from './components/pages/EmployeeLogin';
 import UserView from './components/pages/UserView';
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 function App() {
   // initialize the variables for user login

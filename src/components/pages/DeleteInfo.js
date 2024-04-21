@@ -60,9 +60,7 @@ function DeleteInfo() {
               setConfirmPass('');
               setUFIDerror('');
               setPasswordError('');
-              console.log('User Update up successfully');
-              
-              
+              console.log('User Update up successfully');              
           } else {
               console.error('Error deleting:', response.statusText);
           }

@@ -19,8 +19,9 @@
 .buttons-container {
     display: flex;
     align-items: center;
-  }
-  
+    justify-content: space-between;
+}
+
 .ProfileInfoRight{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     align-content: right;
