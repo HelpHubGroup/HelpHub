@@ -12,6 +12,8 @@ import UserProfilePage from './components/pages/UserProfilePage';
 import Employee from './components/pages/Employee';
 import EmployeeLogin from './components/pages/EmployeeLogin';
 import UserView from './components/pages/UserView';
+import UpdateInfo from './components/pages/UpdateInfo';
+import DeleteInfo from './components/pages/DeleteInfo';
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -33,10 +35,12 @@ function App() {
         <Navbar loggedIn = {loggedIn}/>
         <Routes>
         <Route path='/' exact element={ <Home />}/>
-          <Route path='/services' element={<Services />} /> 
+          <Route path='/services' element={<Services />} />
           <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login changeLoginStatus ={changeLoginStatus} />}/>
           <Route path='/sign-up' element={<SignUp/>} />
+          <Route path='/update-info' element={<UpdateInfo/>} />
+          <Route path='/delete-info' element={<DeleteInfo/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />
           <Route path='/employee-login' element={<EmployeeLogin />} />

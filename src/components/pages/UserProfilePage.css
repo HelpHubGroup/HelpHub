@@ -16,6 +16,11 @@
     border: 3px solid #556B2F;
 }
 
+.buttons-container {
+    display: flex;
+    align-items: center;
+  }
+  
 .ProfileInfoRight{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     align-content: right;
