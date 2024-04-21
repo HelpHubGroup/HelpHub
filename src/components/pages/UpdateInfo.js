@@ -10,7 +10,6 @@ function UpdateInfo() {
     const[lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    const [UFIDerror, setUFIDerror] = useState('')
     const [lastNameError, setLastNameError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [userData, setUserData] = useState([]);
@@ -21,6 +20,7 @@ function UpdateInfo() {
         const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
         console.log(response.data);
         setUserData(response.data);
+        setUFID(userData[0].UFID)
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -33,8 +33,7 @@ function UpdateInfo() {
     }, []);
 
     const onButtonClick = async () => {
-      if (!UFID || !firstName || !lastName || !password || !confirmPass) {
-          setUFIDerror('All fields are required');
+      if (!firstName || !lastName || !password || !confirmPass) {
           setLastNameError('All fields are required');
           setPasswordError('All fields are required');
           return;
@@ -47,19 +46,17 @@ function UpdateInfo() {
   
       // If all fields are filled and passwords match, proceed to make API call
       try {
-        const response = await axios.get(`http://localhost:5001/api/update_user/:UFID?query=${(userData[0].UFID)}`, {     
-              firstName,
-              lastName,
-              password,
-          });
+        const response = await axios.put(`http://localhost:5001/api/update_user/${UFID}`, {
+            firstName,
+            lastName,
+            password,
+        });
           if (response.status === 201) {
               // If the request is successful, reset the form
-              setUFID('');
               setFirstName('');
               setLastName('');
               setPassword('');
               setConfirmPass('');
-              setUFIDerror('');
               setLastNameError('');
               setPasswordError('');
               console.log('User Update up successfully');
@@ -89,7 +86,6 @@ function UpdateInfo() {
                           onChange={(ev) => setFirstName(ev.target.value)}
                           className={'inputBox'}
                       />
-                      <label className="errorLabel">{UFIDerror}</label>
                       <br />
                       <input
                           value={lastName}
@@ -98,14 +94,6 @@ function UpdateInfo() {
                           className={'inputBox'}
                       />
                       <label className="errorLabel">{lastNameError}</label>
-                      <br />
-                      <input
-                          value={UFID}
-                          placeholder={userData[0].UFID}
-                          onChange={(ev) => setUFID(ev.target.value)}
-                          className={'inputBox'}
-                      />
-                      <label className="errorLabel">{UFIDerror}</label>
                       <br />
                       <input
                           value={password}
