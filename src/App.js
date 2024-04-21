@@ -14,6 +14,7 @@ import EmployeeLogin from './components/pages/EmployeeLogin';
 import UserView from './components/pages/UserView';
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
+import Orders from './components/pages/Orders';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path='/employee-login' element={<EmployeeLogin />} />
           <Route path='/employee' element={<Employee />} />
           <Route path='/user-view' element={<UserView />} />
+          <Route path='/orders' element={<Orders />} />
         </Routes>
       </Router>
     </>

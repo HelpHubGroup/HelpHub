@@ -61,8 +61,6 @@ function SignUp() {
           setSignUpStatus('Error signing up');
         }
         
-      
-        
       }
     }
   return (
