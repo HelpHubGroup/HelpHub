@@ -1,15 +1,16 @@
 import './UserProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const UserProfilePage = () => {
+import { Navigate } from 'react-router-dom';
+
+const UserProfilePage = ({UFID}) => {
   // State to hold user data
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // Function to fetch user data
-
+ // const [clicked, setClicked] = useState(false);
   const fetchUserData = async () => {
     try {   
-      const response = await axios.get(`http://localhost:5001/api/getuser?query=${"23417264"}`);
+      const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
       console.log(response.data);
       setUserData(response.data);
       setIsLoading(false);
@@ -23,6 +24,12 @@ const UserProfilePage = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  const handleClick = async (e) => {
+    //setClicked(true);
+     
+  };
+
 
   return (
     <div>
@@ -38,7 +45,7 @@ const UserProfilePage = () => {
             <tbody>
               <tr>
                 <td className='ProfileInfoRight'>UFID</td>
-                <td className='ProfileInfoLeft'>{userData[0].UFid}</td>
+                <td className='ProfileInfoLeft'>{userData[0].UFID}</td>
               </tr>
               <tr>
                 <td className='ProfileInfoRight'>Points</td>
@@ -52,6 +59,10 @@ const UserProfilePage = () => {
                 <td className='ProfileInfoRight'>Past Carts</td>
                 <td className='ProfileInfoLeft'>{"Link to carts"}</td>
               </tr>
+              <div>
+              <input className={'login'} type="button" onClick={handleClick} value={'Access Menu'} />
+
+              </div>
              
             </tbody>
           </table>

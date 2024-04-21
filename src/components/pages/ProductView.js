@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import Button from '../Button';
 import './ProductView.css';
 
-function ProductView() {
+function ProductView({results}) {
 
 
 
-    const onButtonClick = () => {
+    const onButtonClick = ({results}) => {
     }
   return (
     <div>
@@ -33,6 +33,14 @@ function ProductView() {
           {/* Add more rows as needed */}
         </tbody>
       </table>
+      <div>
+      {results.map((response) => (
+        <div key={response.name}>
+          <h3>{response.name}</h3>
+          <p>{response.description}</p>
+        </div>
+      ))}
+    </div>
     </div>
 
   )

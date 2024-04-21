@@ -9,6 +9,8 @@ import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
 import ProductView from './components/pages/ProductView';
 import UserProfilePage from './src/components/pages/UserProfilePage';
+import EmployeeLogin from './components/pages/EmployeeLogin';
+import Employee from './components/pages/Employee';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/user-profile' element={<UserProfilePage />} />
           <Route path='/product-view' element={<ProductView />} />
+       
         </Routes>
       </Router>
     </> 

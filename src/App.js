@@ -9,26 +9,39 @@ import Login from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
 import ProductView from './components/pages/ProductView';
 import UserProfilePage from './components/pages/UserProfilePage';
+import Employee from './components/pages/Employee';
+import EmployeeLogin from './components/pages/EmployeeLogin';
+import UserView from './components/pages/UserView';
 import { useEffect, useState } from 'react'
 
 function App() {
   // initialize the variables for user login
   // and email globally
   const [loggedIn, setLoggedIn] = useState(false)
-  const [UFID, setUFID] = useState('')
+  const [results, setResults] = useState([]);
 
+  const changeLoginStatus = (status) => {
+    setLoggedIn(status);
+  }
+
+
+
+ 
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar loggedIn = {loggedIn}/>
         <Routes>
         <Route path='/' exact element={ <Home />}/>
           <Route path='/services' element={<Services />} /> 
           <Route path='/products' element={<Products />} />
-          <Route path='/login' element={<Login setLoggedIn={setLoggedIn} setEmail={setUFID}/>} />
+          <Route path='/login' element={<Login changeLoginStatus ={changeLoginStatus} />}/>
           <Route path='/sign-up' element={<SignUp/>} />
-          <Route path='/product-view' element = {<ProductView/>}/>
-          <Route path='/user-profile' element={<UserProfilePage/>} />
+          <Route path='/product-view' element = {<ProductView results={results}/>}/>
+          <Route path='/user-profile' element={<UserProfilePage />} />
+          <Route path='/employee-login' element={<EmployeeLogin />} />
+          <Route path='/employee' element={<Employee />} />
+          <Route path='/user-view' element={<UserView />} />
         </Routes>
       </Router>
     </>

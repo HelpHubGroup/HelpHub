@@ -14,10 +14,49 @@ app.use(cors({
 const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Updates user password, first_name, or last_name
+// Updates user cart
 app.put('/api/update_user/:UFid', async (req, res) => {
   try {
-    const userUFid = req.params.UFid;
+    const userUFid = req.params.UFID;
+    const { Cart } = req.body; // Assuming `cart` is the new array
+
+    // Check if at least one field to update is provided
+    if (!Cart) {
+      return res.status(400).json({ error: 'At least one field to update is required.' });
+    }
+
+    await client.connect();
+    const database = client.db("HelpHub");
+    const collection = database.collection("Customers/Students");
+
+    const filter = { UFID: userUFid };
+    const updateFields = {};
+
+    // Add fields to update if provided
+    if (Cart) {
+      // Set the cart field to the new array value
+      updateFields.Cart = Cart;
+    }
+
+    const result = await collection.updateOne(filter, { $set: updateFields });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    res.json({ message: 'User updated successfully.' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
+// Updates user password, first_name, or last_name
+app.put('/api/update_user/:UFID', async (req, res) => {
+  try {
+    const userUFid = req.params.UFID;
     const { firstName, lastName, password } = req.body;
 
     if (!firstName && !lastName && !password) {
@@ -25,10 +64,10 @@ app.put('/api/update_user/:UFid', async (req, res) => {
     }
 
     await client.connect();
-    const database = client.db("YourDatabaseName");
-    const collection = database.collection("Users");
+    const database = client.db("HelpHub");
+    const collection = database.collection("Customers/Students");
 
-    const filter = { UFid: userUFid };
+    const filter = { UFID: userUFid };
     const updateFields = {};
     
     if (firstName) {
@@ -65,9 +104,10 @@ app.delete('/api/delete_user', async (req, res) => {
     const collection = database.collection("Customers/Students");
     
     const query = req.query.query;
+
     
     // Use the query to find and delete the exact item
-    const result = await collection.deleteOne({ UFid: query });
+    const result = await collection.deleteOne({ UFID: query });
     
     // Check if an item was deleted
     if (result.deletedCount === 1) {
@@ -90,8 +130,18 @@ app.post('/api/postuser', async (req, res) => {
       const database = client.db("HelpHub");
       const collection = database.collection("Customers/Students");
 
-      const newData = req.body;
+      // Access UFID from request body
+      const userUFid = req.body.UFID;
 
+      // Check if a user with the same UFID already exists
+      const existingUser = await collection.findOne({ UFID: userUFid });
+      if (existingUser) {
+          // If a user with the same UFID already exists, return an error response
+          return res.status(400).send('User with the same UFID already exists');
+      }
+
+      // If no user with the same UFID exists, proceed to insert the new user
+      const newData = req.body;
       const result = await collection.insertOne(newData);
       console.log('Data inserted:', result.ops);
 
@@ -136,7 +186,7 @@ app.get('/api/getuser', async (req, res) => {
     const query = req.query.query;
     
     // Use the extracted query parameter to filter documents
-    const filter = query ? { UFid: query } : {};
+    const filter = query ? { UFID: query } : {};
     
     const documents = await collection.find(filter).toArray();
     res.json(documents);
@@ -162,6 +212,7 @@ app.get('/api/getitems', async (req, res) => {
     const filter = query ? { Item_Name: query } : {};
     
     const documents = await collection.find(filter).toArray();
+
     res.json(documents);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -175,13 +226,45 @@ app.get('/api/getitems', async (req, res) => {
 app.get('/api/get_allrelateditems', async (req, res) => {
   try {
     await client.connect();
+    console.log("Connected to MongoDB");
+    
+    const database = client.db("HelpHub");
+    const collection = database.collection("Items");
+    
+    const query = req.query.query;
+    console.log("Query:", query);
+    
+    // Construct a regex pattern to match similar words
+    const regex = new RegExp(query, 'i'); // 'i' flag for case-insensitive search
+    
+    // Search for items with Item_Name matching the regex pattern
+    const documents = await collection.find({ Item_Name: { $regex: regex } }).toArray();
+    
+    console.log("Documents found:", documents);
+    
+    res.json(documents);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+    console.log("MongoDB connection closed");
+  }
+});
+
+
+
+// returns an array of items that match Food_Group
+app.get('/api/get_allfood_Groupitems', async (req, res) => {
+  try {
+    await client.connect();
     const database = client.db("HelpHub");
     const collection = database.collection("Items");
     
     const query = req.query.query;
     
-    // Use text search for similar worded items
-    const documents = await collection.find({ $text: { $search: query } }).toArray();
+    // Find documents with the exact same Food_Group
+    const documents = await collection.find({ Food_Group: query }).toArray();
     
     res.json(documents);
   } catch (error) {

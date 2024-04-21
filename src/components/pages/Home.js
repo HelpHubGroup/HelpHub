@@ -5,6 +5,8 @@ import HeroSection from '../HeroSection';
 import Cards2 from '../Cards2';
 import Footer from '../Footer';
 
+
+
 function Home() {
   return (
     <>
