@@ -18,6 +18,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.put('/api/update_cart/:UFid', async (req, res) => {
   try {
     const userUFid = req.params.UFID;
+    console.log(userUFid);
     const { Cart } = req.body; // Assuming `cart` is the new array
 
     // Check if at least one field to update is provided
@@ -53,23 +54,22 @@ app.put('/api/update_cart/:UFid', async (req, res) => {
   }
 });
 
-// Updates user password, first_name, or last_name
-app.put('/api/update_user/:UFID', async (req, res) => {
+//updates user
+app.put('/api/update_user', async (req, res) => {
   try {
-    const userUFid = req.params.UFID;
-    const { firstName, lastName, password } = req.body;
+    const { UFID, firstName, lastName, password } = req.body;
 
-    if (!firstName && !lastName && !password) {
-      return res.status(400).json({ error: 'At least one field to update is required.' });
+    if (!UFID || (!firstName && !lastName && !password)) {
+      return res.status(400).json({ error: 'UFID and at least one field to update are required.' });
     }
 
     await client.connect();
     const database = client.db("HelpHub");
     const collection = database.collection("Customers/Students");
 
-    const filter = { UFID: userUFid };
+    const filter = { UFID: UFID };
     const updateFields = {};
-    
+
     if (firstName) {
       updateFields.First_Name = firstName;
     }
@@ -94,7 +94,6 @@ app.put('/api/update_user/:UFID', async (req, res) => {
     await client.close();
   }
 });
-
 
 // Deletes user based off UFid
 app.delete('/api/delete_user', async (req, res) => {
