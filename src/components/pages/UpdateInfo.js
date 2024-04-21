@@ -46,11 +46,13 @@ function UpdateInfo() {
   
       // If all fields are filled and passwords match, proceed to make API call
       try {
-        const response = await axios.put(`http://localhost:5001/api/update_user/${UFID}`, {
-            firstName,
-            lastName,
-            password,
+        const response = await axios.put(`http://localhost:5001/api/update_user`, {
+        UFID: UFID,
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
         });
+        console.log(response.data);
           if (response.status === 201) {
               // If the request is successful, reset the form
               setFirstName('');
