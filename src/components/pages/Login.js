@@ -16,32 +16,61 @@ import { Navigate } from 'react-router-dom';
 
     const handleLogin = async (e) => {
       e.preventDefault();
+      // if UFID input box is empty
+      if(UFID.trim() == '' && password.trim() == ''){
+        setUFIDerror('Please enter your UFID');
+        setPasswordError('Please enter your password');
+        return;
+      } else if(password.trim() == ''){
+        setPasswordError('Please enter your password');
+        setUFIDerror('');
+        return;
+      }
+        else if(UFID.trim() == ''){
+          setUFIDerror('Please enter your UFID');
+          setPasswordError('');
+          return;
+        }
+      else{
+        setUFIDerror('');
+        setPasswordError('');
+      }
+
+
       try {
         const response = await axios.get(`http://localhost:5001/api/getuser?query=${(UFID)}`);
         const user = response.data[0];
-        if (!user || user.password !== password){
-          localStorage.clear()
-          localStorage.setItem('UFID', UFID);
-          setLoginStatus('Login successful!');
-          changeLoginStatus(true);
-          setIsLoggedIn(true);
-          console.log(localStorage.getItem(Object.keys(localStorage)[0]));
-          
-        } else {
+        console.log(response.data[0]);
+        if (response.status === 200) {
+          if (user.Password == password){
+            localStorage.clear()
+            localStorage.setItem('UFID', UFID);
+            setLoginStatus('Login successful!');
+            setIsLoggedIn(true);
+            
+            console.log(localStorage.getItem(Object.keys(localStorage)[0]));
+          } else {
+            setLoginStatus('Invalid password. Please try again.');
+            setIsLoggedIn(false);
+          }
+
+
+        } else{
           setIsLoggedIn(false);
-          changeLoginStatus(false);
-          setLoginStatus('Invalid credentials. Please try again.');
+          setLoginStatus('UFID not found. Please try again.');
+
         }
         
-       
-         
+
+
+
       } catch (error) {
         setIsLoggedIn(false);
-        changeLoginStatus(true);
         console.error('Error logging in:', error);
-        setLoginStatus('An error occurred. Please try again later.');
+        setLoginStatus('User does not exist. Please try again.');
       }
     };
+    
 
     const handleEmployee = async (e) => {
       setEmployee(true);
