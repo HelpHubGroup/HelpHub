@@ -15,14 +15,12 @@ const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.n
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Updates user cart
-app.put('/api/update_cart/:UFid', async (req, res) => {
+app.put('/api/update_cart', async (req, res) => {
   try {
-    const userUFid = req.params.UFID;
-    console.log(userUFid);
-    const { Cart } = req.body; // Assuming `cart` is the new array
+    const { UFID, Cart} = req.body;
 
     // Check if at least one field to update is provided
-    if (!Cart) {
+    if (!Cart || !UFID) {
       return res.status(400).json({ error: 'At least one field to update is required.' });
     }
 
@@ -30,7 +28,7 @@ app.put('/api/update_cart/:UFid', async (req, res) => {
     const database = client.db("HelpHub");
     const collection = database.collection("Customers/Students");
 
-    const filter = { UFID: userUFid };
+    const filter = { UFID: UFID };
     const updateFields = {};
 
     // Add fields to update if provided
