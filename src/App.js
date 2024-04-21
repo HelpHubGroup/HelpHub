@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react'
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
 import Orders from './components/pages/Orders';
-import { useEffect, useState } from 'react';
+
 
 function App() {
   // initialize the variables for user login
