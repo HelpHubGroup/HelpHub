@@ -15,6 +15,7 @@ import UserView from './components/pages/UserView';
 import { useEffect, useState } from 'react'
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
+import UpdateEmployeeinfo from './components/pages/UpdateEmployeeInfo';
 
 function App() {
   // initialize the variables for user login
@@ -40,6 +41,7 @@ function App() {
           <Route path='/login' element={<Login changeLoginStatus ={changeLoginStatus} />}/>
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/update-info' element={<UpdateInfo/>} />
+          <Route path='/update-employee-info' element={<UpdateEmployeeinfo/>} />
           <Route path='/delete-info' element={<DeleteInfo/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />

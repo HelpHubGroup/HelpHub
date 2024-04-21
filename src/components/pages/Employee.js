@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Button from '../Button';
 import '../../App.css';
 
 function Employee() { {
@@ -49,6 +50,10 @@ function Employee() { {
                
               </tbody>
             </table>
+            <div className={'buttons-container'}>
+              <Button destination='/update-employee-info' buttonStyle='btn--outline2'>UPDATE</Button>
+              <Button destination='/delete-info' buttonStyle='btn--outline2'>DELETE</Button>
+            </div>
             </div>
           ) : (
             <div>Loading Data..</div>
