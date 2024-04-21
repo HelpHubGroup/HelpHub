@@ -15,7 +15,7 @@ const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.n
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Updates user cart
-app.put('/api/update_user/:UFid', async (req, res) => {
+app.put('/api/update_cart/:UFid', async (req, res) => {
   try {
     const userUFid = req.params.UFID;
     const { Cart } = req.body; // Assuming `cart` is the new array
