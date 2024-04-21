@@ -51,9 +51,9 @@ function Employee() { {
                
               </tbody>
             </table>
-            <div className={'buttons-container'}>
+            <div  style={{ textAlign: 'center' }}>
            <Button destination='/orders' buttonStyle='btn--outline2' >VIEW ORDERS</Button>
-           <Button destination='/update-info' buttonStyle='btn--outline2' >UPDATE</Button>
+           
             
           </div>
             </div>
