@@ -163,6 +163,33 @@ app.delete('/api/delete_user', async (req, res) => {
   }
 });
 
+// Deletes employee based off Employee_id
+app.delete('/api/delete_empolyee', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db("HelpHub");
+    const collection = database.collection("Employees");
+    
+    const query = req.query.query;
+
+    
+    // Use the query to find and delete the exact item
+    const result = await collection.deleteOne({ Employee_id: query });
+    
+    // Check if an item was deleted
+    if (result.deletedCount === 1) {
+      res.json({ message: `Item "${query}" deleted successfully.` });
+    } else {
+      res.json({ message: `Item "${query}" not found for deletion.` });
+    }
+  } catch (error) {
+    console.error('Error deleting data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
 // Posts new user into the database
 app.post('/api/postuser', async (req, res) => {
   try {
