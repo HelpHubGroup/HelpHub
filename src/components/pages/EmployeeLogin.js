@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../../App.css';
-import Button from '../Button';
+import { Button } from '../Button';
+
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
