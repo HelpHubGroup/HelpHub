@@ -15,13 +15,12 @@ const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.n
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Updates user cart
-app.put('/api/update_user/:UFid', async (req, res) => {
+app.put('/api/update_cart', async (req, res) => {
   try {
-    const userUFid = req.params.UFID;
-    const { Cart } = req.body; // Assuming `cart` is the new array
+    const { UFID, Cart} = req.body;
 
     // Check if at least one field to update is provided
-    if (!Cart) {
+    if (!Cart || !UFID) {
       return res.status(400).json({ error: 'At least one field to update is required.' });
     }
 
@@ -29,7 +28,7 @@ app.put('/api/update_user/:UFid', async (req, res) => {
     const database = client.db("HelpHub");
     const collection = database.collection("Customers/Students");
 
-    const filter = { UFID: userUFid };
+    const filter = { UFID: UFID };
     const updateFields = {};
 
     // Add fields to update if provided
@@ -53,23 +52,22 @@ app.put('/api/update_user/:UFid', async (req, res) => {
   }
 });
 
-// Updates user password, first_name, or last_name
-app.put('/api/update_user/:UFID', async (req, res) => {
+//updates user
+app.put('/api/update_user', async (req, res) => {
   try {
-    const userUFid = req.params.UFID;
-    const { firstName, lastName, password } = req.body;
+    const { UFID, firstName, lastName, password } = req.body;
 
-    if (!firstName && !lastName && !password) {
-      return res.status(400).json({ error: 'At least one field to update is required.' });
+    if (!UFID || (!firstName && !lastName && !password)) {
+      return res.status(400).json({ error: 'UFID and at least one field to update are required.' });
     }
 
     await client.connect();
     const database = client.db("HelpHub");
     const collection = database.collection("Customers/Students");
 
-    const filter = { UFID: userUFid };
+    const filter = { UFID: UFID };
     const updateFields = {};
-    
+
     if (firstName) {
       updateFields.First_Name = firstName;
     }
@@ -94,7 +92,6 @@ app.put('/api/update_user/:UFID', async (req, res) => {
     await client.close();
   }
 });
-
 
 // Deletes user based off UFid
 app.delete('/api/delete_user', async (req, res) => {
@@ -129,6 +126,35 @@ app.post('/api/postuser', async (req, res) => {
       await client.connect();
       const database = client.db("HelpHub");
       const collection = database.collection("Customers/Students");
+
+      // Access UFID from request body
+      const userUFid = req.body.UFID;
+
+      // Check if a user with the same UFID already exists
+      const existingUser = await collection.findOne({ UFID: userUFid });
+      if (existingUser) {
+          // If a user with the same UFID already exists, return an error response
+          return res.status(400).send('User with the same UFID already exists');
+      }
+
+      // If no user with the same UFID exists, proceed to insert the new user
+      const newData = req.body;
+      const result = await collection.insertOne(newData);
+      console.log('Data inserted:', result.ops);
+
+      res.status(201).send('Data inserted successfully');
+  } catch (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Error inserting data');
+  }
+});
+
+// Posts new orders into the database
+app.post('/api/postorder', async (req, res) => {
+  try {
+      await client.connect();
+      const database = client.db("HelpHub");
+      const collection = database.collection("Orders");
 
       // Access UFID from request body
       const userUFid = req.body.UFID;
@@ -212,6 +238,7 @@ app.get('/api/getitems', async (req, res) => {
     const filter = query ? { Item_Name: query } : {};
     
     const documents = await collection.find(filter).toArray();
+
     res.json(documents);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -225,13 +252,21 @@ app.get('/api/getitems', async (req, res) => {
 app.get('/api/get_allrelateditems', async (req, res) => {
   try {
     await client.connect();
+    console.log("Connected to MongoDB");
+    
     const database = client.db("HelpHub");
     const collection = database.collection("Items");
     
     const query = req.query.query;
+    console.log("Query:", query);
     
-    // Use text search for similar worded items
-    const documents = await collection.find({ $text: { $search: query } }).toArray();
+    // Construct a regex pattern to match similar words
+    const regex = new RegExp(query, 'i'); // 'i' flag for case-insensitive search
+    
+    // Search for items with Item_Name matching the regex pattern
+    const documents = await collection.find({ Item_Name: { $regex: regex } }).toArray();
+    
+    console.log("Documents found:", documents);
     
     res.json(documents);
   } catch (error) {
@@ -239,6 +274,7 @@ app.get('/api/get_allrelateditems', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   } finally {
     await client.close();
+    console.log("MongoDB connection closed");
   }
 });
 
@@ -259,6 +295,30 @@ app.get('/api/get_allfood_Groupitems', async (req, res) => {
     console.error('Error fetching data:', error);
     res.status(500).json({ error: 'Internal server error' });
   } finally {
+    await client.close();
+  }
+});
+
+// returns a array of all orders in the database
+app.get('/api/getallorders', async (req, res) => {
+  try {
+    // Connect to MongoDB client
+    await client.connect();
+    
+    const database = client.db("HelpHub");
+    const collection = database.collection("Orders");
+    
+    // No need for a filter when returning all items
+    const documents = await collection.find({}).toArray();
+
+    // Respond with a success status and data
+    res.json({ success: true, data: documents });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    // Respond with an error status and message
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  } finally {
+    // Close MongoDB client connection
     await client.close();
   }
 });
