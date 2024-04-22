@@ -65,12 +65,12 @@ function Orders() {
           </thead>
           <tbody>
           {orders.Order.map((order, index) => (
-    <tr key={index}>
-      <td>{orders.UFid}</td>
-      <td>{order[0]}</td> {/* Assuming item name is at index 0 */}
-      <td>{order[1]}</td> {/* Assuming quantity is at index 1 */}
-    </tr>
-  ))}
+         <tr key={index}>
+            <td>{orders.UFid}</td>
+            <td>{order[0]}</td> {/* Assuming item name is at index 0 */}
+            <td>{order[1]}</td> {/* Assuming quantity is at index 1 */}
+        </tr>
+       ))}
          
             
                 
