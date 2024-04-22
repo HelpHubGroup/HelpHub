@@ -4,14 +4,14 @@ import Button from '../Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-  function EmployeeLogin({onLogin}) {
+  function EmployeeLogin({onLogin,setIsLoggedIn}) {
 
     const[employeeID, setEmployeeID] = useState('')
     const [password, setPassword] = useState('')
     const [IDerror, setIDerror] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [loginStatus, setLoginStatus] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedStatus, setIsLoggedStatus] = useState(false);
 
     const handleLogin = async (e) => {
       e.preventDefault();
@@ -23,6 +23,7 @@ import { Navigate } from 'react-router-dom';
           localStorage.setItem('employeeID', employeeID);
           setLoginStatus('Login successful!');
           setIsLoggedIn(true);
+          setIsLoggedStatus(true);
           onLogin({employeeID});
           console.log(localStorage.getItem(Object.keys(localStorage)[0]));
         } else {
@@ -38,7 +39,8 @@ import { Navigate } from 'react-router-dom';
     };
 
 
-    if(isLoggedIn){
+    if(isLoggedStatus){
+      setIsLoggedIn(true);
       return <Navigate to='/employee'  />
     } 
    

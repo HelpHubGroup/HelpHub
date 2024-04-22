@@ -39,7 +39,7 @@ function App() {
           <Route path='/delete-info' element={<DeleteInfo/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />
-          <Route path='/employee-login' element={<EmployeeLogin />} />
+          <Route path='/employee-login' element={<EmployeeLogin setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='/employee' element={<Employee />} />
           <Route path='/user-view' element={<UserView />} />
         </Routes>
