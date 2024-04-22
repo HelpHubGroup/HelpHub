@@ -21,25 +21,18 @@ import UpdateEmployeeinfo from './components/pages/UpdateEmployeeInfo';
 function App() {
   // initialize the variables for user login
   // and email globally
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setIsLoggedIn] = useState(false)
   const [results, setResults] = useState([]);
 
-  const changeLoginStatus = (status) => {
-    setLoggedIn(status);
-  }
-
-
-
- 
-  return (
+   return (
     <>
       <Router>
-        {loggedIn ? <Navbar loggedIn={loggedIn} /> : <Navbar2 loggedIn={loggedIn} />}
+      {loggedIn ? <Navbar2 setIsLoggedIn={setIsLoggedIn} /> : <Navbar/>}
         <Routes>
         <Route path='/' exact element={ <Home />}/>
           <Route path='/services' element={<Services />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/login' element={<Login changeLoginStatus ={changeLoginStatus} />}/>
+          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} /> 
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/update-info' element={<UpdateInfo/>} />
           <Route path='/update-employee-info' element={<UpdateEmployeeinfo/>} />

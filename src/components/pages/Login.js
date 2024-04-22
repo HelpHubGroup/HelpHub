@@ -4,14 +4,14 @@ import Button from '../Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-  function Login({changeLoginStatus}) {
+  function Login({ setIsLoggedIn }) {
 
     const[UFID, setUFID] = useState('')
     const [password, setPassword] = useState('')
     const [UFIDerror, setUFIDerror] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [loginStatus, setLoginStatus] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedStatus, setIsLoggedStatus] = useState(false);
     const [employee, setEmployee] = useState(false);
 
     const handleLogin = async (e) => {
@@ -46,17 +46,18 @@ import { Navigate } from 'react-router-dom';
             localStorage.clear()
             localStorage.setItem('UFID', UFID);
             setLoginStatus('Login successful!');
+            setIsLoggedStatus(true);
             setIsLoggedIn(true);
             
             console.log(localStorage.getItem(Object.keys(localStorage)[0]));
           } else {
             setLoginStatus('Invalid password. Please try again.');
-            setIsLoggedIn(false);
+            setIsLoggedStatus(false);
           }
 
 
         } else{
-          setIsLoggedIn(false);
+          setIsLoggedStatus(false);
           setLoginStatus('UFID not found. Please try again.');
 
         }
@@ -65,7 +66,7 @@ import { Navigate } from 'react-router-dom';
 
 
       } catch (error) {
-        setIsLoggedIn(false);
+        setIsLoggedStatus(false);
         console.error('Error logging in:', error);
         setLoginStatus('User does not exist. Please try again.');
       }
@@ -77,7 +78,7 @@ import { Navigate } from 'react-router-dom';
        
     };
 
-    if(isLoggedIn){
+    if(isLoggedStatus){
       return <Navigate to='/user-profile'  />
     } 
     if(employee){
