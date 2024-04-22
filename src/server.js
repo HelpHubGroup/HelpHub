@@ -149,6 +149,35 @@ app.post('/api/postuser', async (req, res) => {
   }
 });
 
+// Posts new orders into the database
+app.post('/api/postorder', async (req, res) => {
+  try {
+      await client.connect();
+      const database = client.db("HelpHub");
+      const collection = database.collection("Orders");
+
+      // Access UFID from request body
+      const userUFid = req.body.UFID;
+
+      // Check if a user with the same UFID already exists
+      const existingUser = await collection.findOne({ UFID: userUFid });
+      if (existingUser) {
+          // If a user with the same UFID already exists, return an error response
+          return res.status(400).send('User with the same UFID already exists');
+      }
+
+      // If no user with the same UFID exists, proceed to insert the new user
+      const newData = req.body;
+      const result = await collection.insertOne(newData);
+      console.log('Data inserted:', result.ops);
+
+      res.status(201).send('Data inserted successfully');
+  } catch (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Error inserting data');
+  }
+});
+
 // Gets Employee based off Employee_id
 app.get('/api/getEmployee', async (req, res) => {
   try {
@@ -248,8 +277,6 @@ app.get('/api/get_allrelateditems', async (req, res) => {
     console.log("MongoDB connection closed");
   }
 });
-
-
 
 // returns an array of items that match Food_Group
 app.get('/api/get_allfood_Groupitems', async (req, res) => {
