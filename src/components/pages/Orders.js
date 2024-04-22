@@ -6,7 +6,6 @@ import axios from 'axios';
 function Orders() {
  
 
-
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
 
@@ -20,8 +19,10 @@ function Orders() {
         setLoading(true);
         try {
           const response = await axios.get('http://localhost:5001/api/getallorders');
-          setOrders(response.data);
-          console.log(orders);
+          setOrders(response.data.data[0]);
+         
+
+          console.log(response.data.data[0]);
           setCantGet(false);
           setLoading(false);
           } catch (err) {
@@ -56,28 +57,22 @@ function Orders() {
         <table className='items-table'>
           <thead>
             <tr>
-              <th>Order Number</th>
+              <th>UFID order</th>
               <th>Item Name</th>
               <th>Quantity</th>
               
             </tr>
           </thead>
           <tbody>
+          {orders.Order.map((order, index) => (
+    <tr key={index}>
+      <td>{orders.UFid}</td>
+      <td>{order[0]}</td> {/* Assuming item name is at index 0 */}
+      <td>{order[1]}</td> {/* Assuming quantity is at index 1 */}
+    </tr>
+  ))}
+         
             
-            {(() => {
-            const rows = [];
-            for (let i = 0; i < orders.length; i++) {
-                const order = orders[i];
-                rows.push(
-                <tr key={i}>
-                    <td>{i + 1}</td> {/* Adding 1 to index to display order number */}
-                    <td>{order[0]}</td> {/* Assuming first attribute is item name */}
-                    <td>{order[1]}</td> {/* Assuming second attribute is quantity */}
-                </tr>
-          );
-        }
-        return rows;
-      })()}
                 
           </tbody>
         </table>
