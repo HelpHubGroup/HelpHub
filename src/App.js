@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react'
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
 import Orders from './components/pages/Orders';
+import Cart from './components/pages/Cart';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path='/employee' element={<Employee />} />
           <Route path='/user-view' element={<UserView />} />
           <Route path='/orders' element={<Orders />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </Router>
     </>
