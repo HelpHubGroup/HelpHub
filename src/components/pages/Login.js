@@ -15,11 +15,7 @@ import { Navigate } from 'react-router-dom';
     const [employee, setEmployee] = useState(false);
 
     const handleLogin = async (e) => {
-      if (!UFID || !password) {
-        setUFIDerror('All fields are required');
-        setPasswordError('All fields are required');
-        return;
-    }
+     
       e.preventDefault();
       // if UFID input box is empty
       if(UFID.trim() == '' && password.trim() == ''){
