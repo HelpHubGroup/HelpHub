@@ -11,6 +11,7 @@ import ProductView from './components/pages/ProductView';
 import UserProfilePage from './src/components/pages/UserProfilePage';
 import EmployeeLogin from './components/pages/EmployeeLogin';
 import Employee from './components/pages/Employee';
+import Cart from './components/pages/Cart';
 
 function App() {
   return (
