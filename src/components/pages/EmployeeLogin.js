@@ -86,7 +86,7 @@ import { Navigate } from 'react-router-dom';
     if(isLoggedStatus){
       setIsLoggedIn(true);
       return <Navigate to='/employee'  />
-    } 
+    }
    
   return (
     <div className={'mainContainer'}>
