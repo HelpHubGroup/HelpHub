@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import '../../App.css';
 import { Button } from '../Button';
-
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
@@ -16,8 +15,6 @@ import { Navigate } from 'react-router-dom';
 
     const handleLogin = async (e) => {
       e.preventDefault();
-
-
       // if ID input box is empty
       if(employeeID.trim() == '' && password.trim() == ''){
         setIDerror('Please enter your ID');
@@ -49,44 +46,43 @@ import { Navigate } from 'react-router-dom';
           setIsLoggedStatus(true);
           onLogin({employeeID});
           console.log(localStorage.getItem(Object.keys(localStorage)[0]));
-        } else {
+        } 
+        else {
           setLoginStatus('Invalid credentials. Please try again.');
         console.log(response.data[0]);
+
         if (response.status === 200) {
-          if (user.Password == password){
+          if (user.Password === password){
             localStorage.clear()
             localStorage.setItem('ID', employeeID);
             setLoginStatus('Login successful!');
             setIsLoggedIn(true);
-            
+            setIsLoggedStatus(true);
             console.log(localStorage.getItem(Object.keys(localStorage)[0]));
           } else {
             setLoginStatus('Invalid password. Please try again.');
-            setIsLoggedIn(false);
+            setIsLoggedStatus(false);
           }
 
 
         } else{
-          setIsLoggedIn(false);
+          setIsLoggedStatus(false);
           setLoginStatus('ID not found. Please try again.');
 
         }
-        
-
-
-
       }
       } catch (error) {
-        setIsLoggedIn(false);
+        setIsLoggedStatus(false);
         console.error('Error logging in:', error);
         setLoginStatus('User does not exist. Please try again.');
       }
     }
 
-    if(isLoggedStatus){
+  if(isLoggedStatus){
       setIsLoggedIn(true);
-      return <Navigate to='/employee'  />
-    } 
+      return <Navigate to='/employee'/>
+  }
+
    
   return (
     <div className={'mainContainer'}>
@@ -124,9 +120,6 @@ import { Navigate } from 'react-router-dom';
         {loginStatus && <div className="popup">{loginStatus}</div>}
       </div>
     </div>
-
-
-
   )
 }
 
