@@ -82,7 +82,6 @@ import { Navigate } from 'react-router-dom';
       setIsLoggedIn(true);
       return <Navigate to='/employee'/>
   }
-
    
   return (
     <div className={'mainContainer'}>
