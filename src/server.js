@@ -93,6 +93,47 @@ app.put('/api/update_user', async (req, res) => {
   }
 });
 
+//updates user
+app.put('/api/update_employee', async (req, res) => {
+  try {
+    const { Employee_id, firstName, lastName, password } = req.body;
+
+    if (!Employee_id || (!firstName && !lastName && !password)) {
+      return res.status(400).json({ error: 'employeeid and at least one field to update are required.' });
+    }
+
+    await client.connect();
+    const database = client.db("HelpHub");
+    const collection = database.collection("Employees");
+
+    const filter = { Employee_id: Employee_id };
+    const updateFields = {};
+
+    if (firstName) {
+      updateFields.First_Name = firstName;
+    }
+    if (lastName) {
+      updateFields.Last_Name = lastName;
+    }
+    if (password) {
+      updateFields.Password = password;
+    }
+
+    const result = await collection.updateOne(filter, { $set: updateFields });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    res.json({ message: 'User updated successfully.' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
 // Deletes user based off UFid
 app.delete('/api/delete_user', async (req, res) => {
   try {
@@ -105,6 +146,33 @@ app.delete('/api/delete_user', async (req, res) => {
     
     // Use the query to find and delete the exact item
     const result = await collection.deleteOne({ UFID: query });
+    
+    // Check if an item was deleted
+    if (result.deletedCount === 1) {
+      res.json({ message: `Item "${query}" deleted successfully.` });
+    } else {
+      res.json({ message: `Item "${query}" not found for deletion.` });
+    }
+  } catch (error) {
+    console.error('Error deleting data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
+// Deletes employee based off Employee_id
+app.delete('/api/delete_empolyee', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db("HelpHub");
+    const collection = database.collection("Employees");
+    
+    const query = req.query.query;
+
+    
+    // Use the query to find and delete the exact item
+    const result = await collection.deleteOne({ Employee_id: query });
     
     // Check if an item was deleted
     if (result.deletedCount === 1) {

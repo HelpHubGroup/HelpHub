@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Button from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar2.css';
 
-function Navbar() {
+function Navbar({ setIsLoggedIn }) {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); 
+  };
 
   return (
     <>
@@ -14,7 +19,6 @@ function Navbar() {
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
             <i className='fas fa-seedling' />
-            &nbsp;
             HELPHUB
           </Link>
           <div className='menu-icon' onClick={handleClick}>
@@ -36,6 +40,8 @@ function Navbar() {
               <i className='fas fa-user-circle' />
             </Link>
           </div> 
+          <Button onClick={handleLogout} destination='/' buttonStyle='btn--outline2'>LOGOUT</Button>          
+
         </div>
       </nav>
     </>

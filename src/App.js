@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Navbar2 from './components/Navbar2';
 import './App.css';
 import Home from './components/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -15,37 +16,31 @@ import UserView from './components/pages/UserView';
 import { useEffect, useState } from 'react'
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
+import UpdateEmployeeinfo from './components/pages/UpdateEmployeeInfo';
 import Orders from './components/pages/Orders';
-
 
 function App() {
   // initialize the variables for user login
   // and email globally
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setIsLoggedIn] = useState(false)
   const [results, setResults] = useState([]);
 
-  const changeLoginStatus = (status) => {
-    setLoggedIn(status);
-  }
-
-
-
- 
-  return (
+   return (
     <>
       <Router>
-        <Navbar loggedIn = {loggedIn}/>
+      {loggedIn ? <Navbar2 setIsLoggedIn={setIsLoggedIn} /> : <Navbar/>}
         <Routes>
         <Route path='/' exact element={ <Home />}/>
           <Route path='/services' element={<Services />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/login' element={<Login changeLoginStatus ={changeLoginStatus} />}/>
+          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} /> 
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/update-info' element={<UpdateInfo/>} />
+          <Route path='/update-employee-info' element={<UpdateEmployeeinfo/>} />
           <Route path='/delete-info' element={<DeleteInfo/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />
-          <Route path='/employee-login' element={<EmployeeLogin />} />
+          <Route path='/employee-login' element={<EmployeeLogin setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='/employee' element={<Employee />} />
           <Route path='/user-view' element={<UserView />} />
           <Route path='/orders' element={<Orders />} />

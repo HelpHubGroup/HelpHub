@@ -36,20 +36,15 @@ function Navbar(props) {
         
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
           <i class='fas fa-seedling' />
-          &nbsp;
           HELPHUB
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <div className='cart-icon'>
-            
-          
               <img src="../images/cart.png" alt="Cart" className='btn--image'/>
-              
-             
-                
           </div>
+          
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             
             <li className='nav-item'>
@@ -57,8 +52,6 @@ function Navbar(props) {
                 Home
               </Link>
             </li>
-            
-
             <li>
               <Link
                 to='/sign-up'
@@ -79,13 +72,13 @@ function Navbar(props) {
               </Link>
             </li>
           </ul>
+          <div className='buttons-container'>
           {button && <Button buttonStyle='btn--outline2' destination='/sign-up' >REGISTER</Button>}
-          {button && <Button buttonStyle='btn--outline'destination='/login'>LOGIN IN</Button>} 
-          <br />
-          {button && <Button buttonStyle='btn--outline'destination='/user-view'>Menu</Button>} 
-      
-          {props.loggedIn && <img src=''/>}
-        </div>
+          </div>
+          <div>
+          {button && <Button buttonStyle='btn--outline' destination='/login'>LOGIN</Button>}
+          </div>
+          </div>
       </nav>
     </>
   );
