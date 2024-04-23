@@ -4,7 +4,7 @@ import Button from '../Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-  function Login({ setIsLoggedIn }) {
+  function Login({ setIsLoggedIn,setisEmployee }) {
 
     const[UFID, setUFID] = useState('')
     const [password, setPassword] = useState('')
@@ -80,6 +80,7 @@ import { Navigate } from 'react-router-dom';
     };
 
     if(isLoggedStatus){
+      setisEmployee(false)
       return <Navigate to='/user-profile'  />
     } 
     if(employee){

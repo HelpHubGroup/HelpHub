@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-  function EmployeeLogin({onLogin,setIsLoggedIn}) {
+  function EmployeeLogin({onLogin,setIsLoggedIn,setisEmployee}) {
 
     const[employeeID, setEmployeeID] = useState('')
     const [password, setPassword] = useState('')
@@ -80,6 +80,7 @@ import { Navigate } from 'react-router-dom';
 
   if(isLoggedStatus){
       setIsLoggedIn(true);
+      setisEmployee(true);
       return <Navigate to='/employee'/>
   }
    

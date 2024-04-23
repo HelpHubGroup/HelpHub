@@ -24,24 +24,26 @@ function App() {
   // initialize the variables for user login
   // and email globally
   const [loggedIn, setIsLoggedIn] = useState(false)
+  const [isEmployee, setisEmployee] = useState(false)
+
   const [results, setResults] = useState([]);
 
    return (
     <>
       <Router>
-      {loggedIn ? <Navbar2 setIsLoggedIn={setIsLoggedIn} /> : <Navbar/>}
+      {loggedIn ? <Navbar2 setIsLoggedIn={setIsLoggedIn} isEmployee={isEmployee} /> : <Navbar/>}
         <Routes>
         <Route path='/' exact element={ <Home />}/>
           <Route path='/services' element={<Services />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} /> 
+          <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setisEmployee={setisEmployee} />} /> 
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/update-info' element={<UpdateInfo/>} />
           <Route path='/update-employee-info' element={<UpdateEmployeeinfo/>} />
           <Route path='/delete-info' element={<DeleteInfo/>} />
           <Route path='/product-view' element = {<ProductView results={results}/>}/>
           <Route path='/user-profile' element={<UserProfilePage />} />
-          <Route path='/employee-login' element={<EmployeeLogin setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path='/employee-login' element={<EmployeeLogin setIsLoggedIn={setIsLoggedIn} setisEmployee={setisEmployee} />} />
           <Route path='/employee' element={<Employee />} />
           <Route path='/user-view' element={<UserView />} />
           <Route path='/orders' element={<Orders />} />

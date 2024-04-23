@@ -3,7 +3,7 @@ import Button from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar2.css';
 
-function Navbar({ setIsLoggedIn }) {
+function Navbar({ setIsLoggedIn,isEmployee}) {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -36,7 +36,7 @@ function Navbar({ setIsLoggedIn }) {
             <Link to='/cart' className='nav-icon' onClick={closeMobileMenu}>
               <i className='fas fa-shopping-cart' />
             </Link>
-            <Link to='/user-profile' className='nav-icon' onClick={closeMobileMenu}>
+            <Link to={isEmployee ? '/employee' : '/user-profile'} className='nav-icon' onClick={closeMobileMenu}>
               <i className='fas fa-user-circle' />
             </Link>
           </div> 
