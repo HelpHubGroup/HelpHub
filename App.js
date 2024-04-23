@@ -13,6 +13,7 @@ import ProductView from './components/pages/ProductView';
 import UserProfilePage from './src/components/pages/UserProfilePage';
 import EmployeeLogin from './components/pages/EmployeeLogin';
 import Employee from './components/pages/Employee';
+import Cart from './components/pages/Cart';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/user-profile' element={<UserProfilePage />} />
           <Route path='/product-view' element={<ProductView />} />
+          <Route path='/cart' element={<Cart />} />
        
         </Routes>
       </Router>
