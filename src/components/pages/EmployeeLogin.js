@@ -1,51 +1,43 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../../App.css';
 import { Button } from '../Button';
+
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-function EmployeeLogin({ onLogin, setIsLoggedIn }) {
-  const [employeeID, setEmployeeID] = useState('');
-  const [password, setPassword] = useState('');
-  const [IDerror, setIDerror] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [loginStatus, setLoginStatus] = useState('');
-  const [isLoggedStatus, setIsLoggedStatus] = useState(false);
+  function EmployeeLogin({onLogin,setIsLoggedIn}) {
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+    const[employeeID, setEmployeeID] = useState('')
+    const [password, setPassword] = useState('')
+    const [IDerror, setIDerror] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [loginStatus, setLoginStatus] = useState('');
+    const [isLoggedStatus, setIsLoggedStatus] = useState(false);
 
-    // if ID or password is empty
-    if (employeeID.trim() === '' || password.trim() === '') {
-      setIDerror('Please enter your ID');
-      setPasswordError('Please enter your password');
-      return;
-    } else {
-      setIDerror('');
-      setPasswordError('');
-    }
+    const handleLogin = async (e) => {
+      e.preventDefault();
 
-    try {
-      const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${employeeID}`);
-      const user = response.data[0];
 
-      if (!user || user.password !== password) {
-        setLoginStatus('Invalid credentials. Please try again.');
-      } else {
-        localStorage.clear();
-        localStorage.setItem('employeeID', employeeID);
-        setLoginStatus('Login successful!');
-        setIsLoggedIn(true);
-        setIsLoggedStatus(true);
-        onLogin({ employeeID });
-        return <Navigate to='/employee' />;
+      // if ID input box is empty
+      if(employeeID.trim() == '' && password.trim() == ''){
+        setIDerror('Please enter your ID');
+        setPasswordError('Please enter your password');
+        return;
+      } else if(password.trim() == ''){
+        setPasswordError('Please enter your password');
+        setIDerror('');
+        return;
       }
-    } catch (error) {
-      setIsLoggedIn(false);
-      console.error('Error logging in:', error);
-      setLoginStatus('User does not exist. Please try again.');
-    }
-  };
+        else if(employeeID.trim() == ''){
+          setIDerror('Please enter your ID');
+          setPasswordError('');
+          return;
+        }
+      else{
+        setIDerror('');
+        setPasswordError('');
+      }
+
       try {
         const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${(employeeID)}`);
         const user = response.data[0];
@@ -91,11 +83,11 @@ function EmployeeLogin({ onLogin, setIsLoggedIn }) {
       }
     }
 
-  if (isLoggedStatus) {
-    setIsLoggedIn(true);
-      return <Navigate to='/employee' />;
-  }
-
+    if(isLoggedStatus){
+      setIsLoggedIn(true);
+      return <Navigate to='/employee'  />
+    } 
+   
   return (
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
@@ -125,10 +117,17 @@ function EmployeeLogin({ onLogin, setIsLoggedIn }) {
       <div className={'inputContainer'}>
         <input className={'login'} type="button" onClick={handleLogin} value={'Log in'} />
         <br />
+        
+        
       </div>
-      <div>{loginStatus && <div className="popup">{loginStatus}</div>}</div>
+      <div>
+        {loginStatus && <div className="popup">{loginStatus}</div>}
+      </div>
     </div>
-  );
+
+
+
+  )
 }
 
 export default EmployeeLogin;
