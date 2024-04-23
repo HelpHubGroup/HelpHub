@@ -50,11 +50,10 @@ function Employee() { {
                
               </tbody>
             </table>
-            <div className={'buttons-container'}>
-              <Button destination='/update-employee-info' buttonStyle='btn--outline2'>UPDATE</Button>
-              <Button destination='/delete-info' buttonStyle='btn--outline2'>DELETE</Button>
+            <div className={'buttons-container'} style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button destination='/update-employee-info' buttonStyle='btn--outline2' >UPDATE</Button>
             </div>
-            </div>
+            </div>  
           ) : (
             <div>Loading Data..</div>
           )}
