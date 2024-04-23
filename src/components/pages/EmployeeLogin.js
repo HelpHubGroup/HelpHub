@@ -85,8 +85,6 @@ import { Navigate } from 'react-router-dom';
 
     if(isLoggedStatus){
       setIsLoggedIn(true);
-
-    if(isLoggedIn){
       return <Navigate to='/employee'  />
     } 
    
