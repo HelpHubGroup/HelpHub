@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './UserView.css';
 import HeroSection from '../HeroSection';
 import axios from 'axios';
@@ -14,10 +14,29 @@ function UserView() {
     { name: 'Protein', image: 'img-protein.png' },
     { name: 'Beans', image: 'img-beans.png' }
   ];
+  const[UFID, setUFID] = useState('');
+  const[Cart, setCart] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchUserData = async () => {
+    try {   
+      const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
+      console.log(response.data);
+      setUFID(response.data[0].UFID)
+      setCart(response.data[0].Cart)
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setIsLoading(false);
+    } 
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [cart, setCart] = useState([]);
 
   const fetchItems = async (categoryName) => {
     setLoading(true);
@@ -39,9 +58,42 @@ function UserView() {
     setItems(searchedItems);
   };
 
+  const update_Cart = async (cart) => {
+    // If all fields are filled and passwords match, proceed to make API call
+    try {
+      console.log(UFID);
+      console.log(Cart);
+      const response = await axios.put(`http://localhost:5001/api/update_cart`, {
+      UFID: UFID,
+      Cart: cart,
+      });
+      console.log(response.data);
+        if (response.status === 201) {
+            console.log('Cart Update up successfully');
+            
+        } else {
+            console.error('Error updating:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error updating user:', error);
+    }
+  }
+
   const handleAddToCart = (itemName) => {
-    console.log(`Added ${itemName} to cart`);
-    // implement the functionality to add items to the cart here
+    let current_Cart = Cart;
+    let completed = false
+    for (let i = 0; i < current_Cart.length; i++) {
+      if(current_Cart[i][0] === itemName){
+        current_Cart[i][1] += 1;
+        completed = true;
+        console.log(`Added ${itemName} to cart`);
+      }
+    }
+    if(completed === false){
+      current_Cart.push([itemName, 1]);
+    }
+    console.log(current_Cart);
+    update_Cart(current_Cart);
   };
 
   return (

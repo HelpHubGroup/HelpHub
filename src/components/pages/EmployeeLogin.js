@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../../App.css';
-import Button from '../Button';
+import { Button } from '../Button';
+
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
@@ -15,6 +16,28 @@ import { Navigate } from 'react-router-dom';
 
     const handleLogin = async (e) => {
       e.preventDefault();
+
+
+      // if ID input box is empty
+      if(employeeID.trim() == '' && password.trim() == ''){
+        setIDerror('Please enter your ID');
+        setPasswordError('Please enter your password');
+        return;
+      } else if(password.trim() == ''){
+        setPasswordError('Please enter your password');
+        setIDerror('');
+        return;
+      }
+        else if(employeeID.trim() == ''){
+          setIDerror('Please enter your ID');
+          setPasswordError('');
+          return;
+        }
+      else{
+        setIDerror('');
+        setPasswordError('');
+      }
+
       try {
         const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${(employeeID)}`);
         const user = response.data[0];
@@ -28,19 +51,42 @@ import { Navigate } from 'react-router-dom';
           console.log(localStorage.getItem(Object.keys(localStorage)[0]));
         } else {
           setLoginStatus('Invalid credentials. Please try again.');
+        console.log(response.data[0]);
+        if (response.status === 200) {
+          if (user.Password == password){
+            localStorage.clear()
+            localStorage.setItem('ID', employeeID);
+            setLoginStatus('Login successful!');
+            setIsLoggedIn(true);
+            
+            console.log(localStorage.getItem(Object.keys(localStorage)[0]));
+          } else {
+            setLoginStatus('Invalid password. Please try again.');
+            setIsLoggedIn(false);
+          }
+
+
+        } else{
+          setIsLoggedIn(false);
+          setLoginStatus('ID not found. Please try again.');
+
         }
         
-       
-         
-      } catch (error) {
-        console.error('Error logging in:', error);
-        setLoginStatus('An error occurred. Please try again later.');
-      }
-    };
 
+
+
+      }
+      } catch (error) {
+        setIsLoggedIn(false);
+        console.error('Error logging in:', error);
+        setLoginStatus('User does not exist. Please try again.');
+      }
+    }
 
     if(isLoggedStatus){
       setIsLoggedIn(true);
+
+    if(isLoggedIn){
       return <Navigate to='/employee'  />
     } 
    

@@ -6,6 +6,7 @@ import axios from 'axios';
 function UpdateInfo() {
 
     const[UFID, setUFID] = useState('')
+    const[Cart, setCart] = useState('')
     const[firstName, setFirstName] = useState('')
     const[lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
@@ -21,6 +22,7 @@ function UpdateInfo() {
         console.log(response.data);
         setUserData(response.data);
         setUFID(response.data[0].UFID)
+        setCart(response.data[0].Cart)
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -47,6 +49,7 @@ function UpdateInfo() {
       // If all fields are filled and passwords match, proceed to make API call
       try {
         console.log(UFID);
+        console.log(Cart);
         const response = await axios.put(`http://localhost:5001/api/update_user`, {
         UFID: UFID,
         firstName: firstName,
