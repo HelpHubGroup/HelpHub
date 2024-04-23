@@ -15,6 +15,7 @@ import { Navigate } from 'react-router-dom';
     const [employee, setEmployee] = useState(false);
 
     const handleLogin = async (e) => {
+     
       e.preventDefault();
       // if UFID input box is empty
       if(UFID.trim() == '' && password.trim() == ''){

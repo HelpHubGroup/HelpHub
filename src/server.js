@@ -15,14 +15,12 @@ const uri = "mongodb+srv://kevinSu27:cIBZkmEQUapb19NP@cluster0.7usfwq7.mongodb.n
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Updates user cart
-app.put('/api/update_cart/:UFid', async (req, res) => {
+app.put('/api/update_cart', async (req, res) => {
   try {
-    const userUFid = req.params.UFID;
-    console.log(userUFid);
-    const { Cart } = req.body; // Assuming `cart` is the new array
+    const { UFID, Cart} = req.body;
 
     // Check if at least one field to update is provided
-    if (!Cart) {
+    if (!Cart || !UFID) {
       return res.status(400).json({ error: 'At least one field to update is required.' });
     }
 
@@ -30,7 +28,7 @@ app.put('/api/update_cart/:UFid', async (req, res) => {
     const database = client.db("HelpHub");
     const collection = database.collection("Customers/Students");
 
-    const filter = { UFID: userUFid };
+    const filter = { UFID: UFID };
     const updateFields = {};
 
     // Add fields to update if provided
@@ -219,6 +217,35 @@ app.post('/api/postuser', async (req, res) => {
   }
 });
 
+// Posts new orders into the database
+app.post('/api/postorder', async (req, res) => {
+  try {
+      await client.connect();
+      const database = client.db("HelpHub");
+      const collection = database.collection("Orders");
+
+      // Access UFID from request body
+      const userUFid = req.body.UFID;
+
+      // Check if a user with the same UFID already exists
+      const existingUser = await collection.findOne({ UFID: userUFid });
+      if (existingUser) {
+          // If a user with the same UFID already exists, return an error response
+          return res.status(400).send('User with the same UFID already exists');
+      }
+
+      // If no user with the same UFID exists, proceed to insert the new user
+      const newData = req.body;
+      const result = await collection.insertOne(newData);
+      console.log('Data inserted:', result.ops);
+
+      res.status(201).send('Data inserted successfully');
+  } catch (err) {
+      console.error('Error inserting data:', err);
+      res.status(500).send('Error inserting data');
+  }
+});
+
 // Gets Employee based off Employee_id
 app.get('/api/getEmployee', async (req, res) => {
   try {
@@ -319,8 +346,6 @@ app.get('/api/get_allrelateditems', async (req, res) => {
   }
 });
 
-
-
 // returns an array of items that match Food_Group
 app.get('/api/get_allfood_Groupitems', async (req, res) => {
   try {
@@ -349,7 +374,7 @@ app.get('/api/getallorders', async (req, res) => {
     await client.connect();
     
     const database = client.db("HelpHub");
-    const collection = database.collection("Items");
+    const collection = database.collection("Orders");
     
     // No need for a filter when returning all items
     const documents = await collection.find({}).toArray();

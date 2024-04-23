@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react'
 import UpdateInfo from './components/pages/UpdateInfo';
 import DeleteInfo from './components/pages/DeleteInfo';
 import UpdateEmployeeinfo from './components/pages/UpdateEmployeeInfo';
+import Orders from './components/pages/Orders';
 
 function App() {
   // initialize the variables for user login
@@ -42,6 +43,7 @@ function App() {
           <Route path='/employee-login' element={<EmployeeLogin setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='/employee' element={<Employee />} />
           <Route path='/user-view' element={<UserView />} />
+          <Route path='/orders' element={<Orders />} />
         </Routes>
       </Router>
     </>

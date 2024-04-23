@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '../Button';
 import '../../App.css';
+import { Button } from '../Button';
+
 
 function Employee() { {
     // State to hold user data
@@ -54,6 +56,11 @@ function Employee() { {
               <Button destination='/update-employee-info' buttonStyle='btn--outline2'>UPDATE</Button>
               <Button destination='/delete-info' buttonStyle='btn--outline2'>DELETE</Button>
             </div>
+            <div  style={{ textAlign: 'center' }}>
+           <Button destination='/orders' buttonStyle='btn--outline2' >VIEW ORDERS</Button>
+           
+            
+          </div>
             </div>
           ) : (
             <div>Loading Data..</div>
