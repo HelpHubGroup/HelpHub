@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from '../Button';
 import '../../App.css';
 import { Button } from '../Button';
 

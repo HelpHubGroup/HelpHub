@@ -74,8 +74,6 @@ function Navbar(props) {
           </ul>
           <div className='buttons-container'>
           {button && <Button buttonStyle='btn--outline2' destination='/sign-up' >REGISTER</Button>}
-          </div>
-          <div>
           {button && <Button buttonStyle='btn--outline' destination='/login'>LOGIN</Button>}
           </div>
           </div>
