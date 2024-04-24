@@ -7,6 +7,7 @@ function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
+  const[UFID, setUFID] = useState('');
 
   useEffect(() => {
     fetchCart();
@@ -17,6 +18,7 @@ function Cart() {
     try {
       const response = await axios.get(`http://localhost:5001/api/getuser`);
       setCart(response.data);
+      setUFID(response.data[0].UFID)
       setLoading(false);
     } catch (error) {
       console.error('Failed to fetch cart:', error);
@@ -27,6 +29,7 @@ function Cart() {
   const updateCart = async (updatedCart) => {
     try {
       const response = await axios.put(`http://localhost:5001/api/update_cart`, {
+        UFID: UFID,
         Cart: updatedCart
       });
       console.log(response.data);
@@ -35,7 +38,7 @@ function Cart() {
       console.error('Error updating cart:', error);
     }
   };
-
+  
   const handleRemoveFromCart = (itemName) => {
     let currentCart = [...cart[0].Cart]; // Create a shallow copy of the cart to avoid direct state mutation
     let itemFound = false;
