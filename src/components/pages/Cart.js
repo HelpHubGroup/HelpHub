@@ -7,6 +7,7 @@ function Cart() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Initialize useNavigate
+  const[UFID, setUFID] = useState('');
 
   useEffect(() => {
     fetchCart();
@@ -15,7 +16,8 @@ function Cart() {
   const fetchCart = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5001/api/getuser`);
+      const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
+      setUFID(response.data[0].UFID);
       setCart(response.data);
       setLoading(false);
     } catch (error) {
@@ -27,6 +29,7 @@ function Cart() {
   const updateCart = async (updatedCart) => {
     try {
       const response = await axios.put(`http://localhost:5001/api/update_cart`, {
+        UFID: UFID,
         Cart: updatedCart
       });
       console.log(response.data);
@@ -62,7 +65,9 @@ function Cart() {
 
   const handleCheckout = async () => {
     try {
-      await axios.post(`http://localhost:5001/api/postorder`, { cart });
+      await axios.post(`http://localhost:5001/api/postorder`, { 
+        UFid: UFID,
+        Cart: cart[0].Cart});
       console.log('Order added successfully');
       // Redirect to user view page after checkout
       navigate('/user-view');
