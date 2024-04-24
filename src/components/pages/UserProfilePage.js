@@ -69,5 +69,5 @@ const UserProfilePage = ({UFID}) => {
     </div>
   );
 };
-
+//Display User Info and also allow for update and deleting of Info/Data
 export default UserProfilePage;

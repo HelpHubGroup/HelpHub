@@ -36,7 +36,7 @@ import { Navigate } from 'react-router-dom';
       }
 
       try {
-        const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${(employeeID)}`);
+        const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${(employeeID)}`); // Gather information based off Employee ID
         const user = response.data[0];
         if (!user || user.password !== password){
           localStorage.clear()
@@ -79,8 +79,8 @@ import { Navigate } from 'react-router-dom';
     }
 
   if(isLoggedStatus){
-      setIsLoggedIn(true);
-      setisEmployee(true);
+      setIsLoggedIn(true);//Set Login so that it is known in main App.js File
+      setisEmployee(true);//Sets Info so that Login Info is know for Employee
       return <Navigate to='/employee'/>
   }
    
@@ -120,6 +120,7 @@ import { Navigate } from 'react-router-dom';
         {loginStatus && <div className="popup">{loginStatus}</div>}
       </div>
     </div>
+    //Sets in Login screen and also develops page so that it know if info is inputted along with proper info being passed through
   )
 }
 

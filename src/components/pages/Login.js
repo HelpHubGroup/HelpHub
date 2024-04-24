@@ -39,7 +39,7 @@ import { Navigate } from 'react-router-dom';
 
 
       try {
-        const response = await axios.get(`http://localhost:5001/api/getuser?query=${(UFID)}`);
+        const response = await axios.get(`http://localhost:5001/api/getuser?query=${(UFID)}`); //Take in data form UFID to know which individual exist
         const user = response.data[0];
         console.log(response.data[0]);
         if (response.status === 200) {
@@ -78,9 +78,9 @@ import { Navigate } from 'react-router-dom';
       setEmployee(true);
        
     };
-
+    // Check if login is passed and then goes through and to userveiw and set Employee to false as this is a student
     if(isLoggedStatus){
-      setisEmployee(false)
+      setisEmployee(false) 
       return <Navigate to='/user-profile'  />
     } 
     if(employee){
@@ -122,10 +122,8 @@ import { Navigate } from 'react-router-dom';
         {loginStatus && <div className="popup">{loginStatus}</div>}
       </div>
     </div>
-
-
-
   )
 }
+//Develop Login page to take student info and pass it through to User-View
 
 export default Login;

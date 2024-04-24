@@ -14,7 +14,7 @@ function Employee() { {
       try {   
         const response = await axios.get(`http://localhost:5001/api/getEmployee?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
         console.log(response.data);
-        setUserData(response.data);
+        setUserData(response.data); // load local user data to page
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -52,13 +52,11 @@ function Employee() { {
               </tbody>
             </table>
             <div className={'buttons-container'}>
-              <Button destination='/update-employee-info' buttonStyle='btn--outline2'>UPDATE</Button>
+              <Button destination='/update-employee-info' buttonStyle='btn--outline2'>UPDATE</Button> 
               <Button destination='/delete-info' buttonStyle='btn--outline2'>DELETE</Button>
             </div>
             <div  style={{ textAlign: 'center' }}>
            <Button destination='/orders' buttonStyle='btn--outline2' >VIEW ORDERS</Button>
-           
-            
           </div>
             </div>
           ) : (
@@ -69,7 +67,7 @@ function Employee() { {
       </div>
     );
   };
-    
+    //Display of Employee page with button calls to change data 
  
 }
 export default Employee;
