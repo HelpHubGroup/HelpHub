@@ -9,6 +9,7 @@ function Orders() {
 
   useEffect(() => {
     fetchItems();
+    console.log(orderlist.data)
   }, []);
 
   const fetchItems = async () => {
@@ -48,11 +49,11 @@ function Orders() {
           </tr>
         </thead>
         <tbody>
-          {orderlist.data[0].Order.map((order, index) => (
+          {orderlist.data.map((order, index) => (
             <tr key={index}>
-              <td>{orderlist.data[0].UFid}</td> 
-              <td>{order[0]}</td>
-              <td>{order[1]}</td>
+              <td>{order.UFid}</td> 
+              <td>{order.Cart[0][0]}</td>
+              <td>{order.Cart[0][1]}</td>
             </tr>
           ))}
         </tbody>
