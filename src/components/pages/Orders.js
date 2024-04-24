@@ -23,6 +23,10 @@ function Orders() {
     fetchItems();
   }, []);
 
+  useEffect(() => {
+    console.log(orders);
+  }, [orders]);
+
   if (loading) {
     return <p className='loading-text'>Loading...</p>;
   }
