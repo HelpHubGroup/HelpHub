@@ -49,13 +49,17 @@ function Orders() {
           </tr>
         </thead>
         <tbody>
-          {orderlist.data.map((order, index) => (
-            <tr key={index}>
-              <td>{order.UFid}</td> 
-              <td>{order.Cart[0][0]}</td>
-              <td>{order.Cart[0][1]}</td>
-            </tr>
-          ))}
+        {orderlist.data.map((order, orderIndex) => (
+              <React.Fragment key={orderIndex}>
+                {order.Cart.map((item, itemIndex) => (
+                  <tr key={`${order.UFid}-${itemIndex}`}>
+                    <td>{order.UFid}</td>
+                    <td>{item[0]}</td>
+                    <td>{item[1]}</td>
+                  </tr>
+                ))}
+              </React.Fragment>
+            ))}
         </tbody>
       </table>
     )}
