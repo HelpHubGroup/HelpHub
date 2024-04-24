@@ -16,9 +16,9 @@ function Cart() {
   const fetchCart = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5001/api/getuser`);
+      const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
+      setUFID(response.data[0].UFID);
       setCart(response.data);
-      setUFID(response.data[0].UFID)
       setLoading(false);
     } catch (error) {
       console.error('Failed to fetch cart:', error);
@@ -38,7 +38,7 @@ function Cart() {
       console.error('Error updating cart:', error);
     }
   };
-  
+
   const handleRemoveFromCart = (itemName) => {
     let currentCart = [...cart[0].Cart]; // Create a shallow copy of the cart to avoid direct state mutation
     let itemFound = false;
@@ -65,7 +65,9 @@ function Cart() {
 
   const handleCheckout = async () => {
     try {
-      await axios.post(`http://localhost:5001/api/postorder`, { cart });
+      await axios.post(`http://localhost:5001/api/postorder`, { 
+        UFid: UFID,
+        Cart: cart[0].Cart});
       console.log('Order added successfully');
       // Redirect to user view page after checkout
       navigate('/user-view');
