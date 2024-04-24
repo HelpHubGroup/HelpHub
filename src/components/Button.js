@@ -18,6 +18,7 @@ const STYLES = ['btn--primary', 'btn--outline','btn--outline2' , 'btn--test'];
 
 const SIZES = ['btn--medium', 'btn--large'];
 
+// Buttons types
 export const Button = ({
   children,
   type,
@@ -29,7 +30,7 @@ export const Button = ({
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
     : STYLES[0];
-
+  // Button sizes
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (

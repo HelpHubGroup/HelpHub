@@ -13,6 +13,7 @@ function Navbar(props) {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  // Determines button width based of window length
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -28,7 +29,7 @@ function Navbar(props) {
   }, []);
 
   window.addEventListener('resize', showButton);
-
+  //HTML code for navigation bar before signin
   return (
     <>
       <nav className='navbar'>

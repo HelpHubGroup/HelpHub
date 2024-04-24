@@ -3,6 +3,7 @@ import './Cards.css';
 import CardItem from './CardItem';
 
 function Cards() {
+  //Links to external sites
   return (
     <div className='cards'>
       <h1>Less Waiting, More Eating</h1>

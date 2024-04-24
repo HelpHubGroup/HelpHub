@@ -27,7 +27,7 @@ function App() {
   const [isEmployee, setisEmployee] = useState(false)
 
   const [results, setResults] = useState([]);
-
+  //Paths for the different components
    return (
     <>
       <Router>

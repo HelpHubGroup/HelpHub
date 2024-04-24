@@ -4,6 +4,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 
 function Footer() {
+  //Html code for footer along with links to external sites
   return (
     <div className='footer-container'>
       <section className='footer-subscription'> 

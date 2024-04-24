@@ -10,7 +10,7 @@ function HeroSection({ onSearch }) {
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
-
+  // Grabs items from database based off query.
   const handleSearch = async () => {
     setSearching(true);
     try {
@@ -24,7 +24,7 @@ function HeroSection({ onSearch }) {
       setSearching(false);
     }
   };
-
+  // HTML code for the main page
   return (
     <div className='hero-container'>
       <div className='input-areas'>

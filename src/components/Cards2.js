@@ -3,6 +3,7 @@ import './Cards2.css';
 import CardItem from './CardItem';
 
 function Cards() {
+  // Container to display image and text
   return (
     <div className='cards'>
       <h1>Mission and Values</h1>

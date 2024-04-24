@@ -9,10 +9,11 @@ function Navbar({ setIsLoggedIn,isEmployee}) {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  // Logged in logic
   const handleLogout = () => {
     setIsLoggedIn(false); 
   };
-
+  // HTTML code for navigation bar for when users sign in
   return (
     <>
       <nav className='navbar'>

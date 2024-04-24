@@ -2,6 +2,7 @@ import React from 'react';
 import './Gallery.css';
 
 function Gallery({ categories, onCategoryClick }) {
+  //Html code for the display of various images
   return (
     <div className='gallery-container'>
       {categories.map((category, index) => (
