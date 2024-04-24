@@ -15,7 +15,7 @@ function Cart() {
   const fetchCart = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5001/api/get_cart`);
+      const response = await axios.get(`http://localhost:5001/api/getuser`);
       setCart(response.data);
       setLoading(false);
     } catch (error) {
@@ -27,7 +27,7 @@ function Cart() {
   const updateCart = async (updatedCart) => {
     try {
       const response = await axios.put(`http://localhost:5001/api/update_cart`, {
-        Cart: updatedCart,
+        Cart: updatedCart
       });
       console.log(response.data);
       fetchCart(); // Fetch updated cart after successful update
@@ -37,7 +37,7 @@ function Cart() {
   };
 
   const handleRemoveFromCart = (itemName) => {
-    let currentCart = [...cart]; // Create a shallow copy of the cart to avoid direct state mutation
+    let currentCart = [...cart[0].Cart]; // Create a shallow copy of the cart to avoid direct state mutation
     let itemFound = false;
     for (let i = 0; i < currentCart.length; i++) {
       if (currentCart[i][0] === itemName) {
@@ -55,6 +55,7 @@ function Cart() {
       console.error('Item not found in cart to remove');
     } else {
       updateCart(currentCart);
+
       console.log(`Removed one ${itemName} from cart`);
     }
   };
@@ -81,28 +82,25 @@ function Cart() {
         <table className='cart-table'>
           <thead>
             <tr>
-              <th>Food Group</th>
               <th>Item Name</th>
               <th>Quantity</th>
-              <th>Point Cost</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {cart.map((item, index) => (
+              {cart[0].Cart.map((item, index) => (
               <tr key={index}>
-                <td>{item.Food_Group}</td>
-                <td>{item.Item_Name}</td>
-                <td>{item.Quantity}</td>
-                <td>{item.Point_Cost}</td>
+                <td>{item[0]}</td>
+                <td>{item[1]}</td>
                 <td>
-                  <button onClick={() => handleRemoveFromCart(item.Item_Name)}>
-                    Remove from Cart
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          <button onClick={() => handleRemoveFromCart(item[0])}>
+          Remove from Cart
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       )}
       <button className='checkout-button' onClick={handleCheckout}>
