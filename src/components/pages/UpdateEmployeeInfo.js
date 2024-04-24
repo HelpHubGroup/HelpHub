@@ -126,5 +126,5 @@ function UpdateEmployeeInfo() {
       </div>
   );
 }
-
+//Check Employee Data and update all data for indivdual in database
 export default UpdateEmployeeInfo;

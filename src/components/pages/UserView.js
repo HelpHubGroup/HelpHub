@@ -13,7 +13,7 @@ function UserView() {
     { name: 'Nuts', image: 'img-nuts.png' },
     { name: 'Protein', image: 'img-protein.png' },
     { name: 'Beans', image: 'img-beans.png' }
-  ];
+  ]; // Creates Categiores
   const[UFID, setUFID] = useState('');
   const[Cart, setCart] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +21,7 @@ function UserView() {
   const fetchUserData = async () => {
     try {   
       const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
+      //Set Data Into certain const Array
       console.log(response.data);
       setUFID(response.data[0].UFID)
       setCart(response.data[0].Cart)
@@ -42,6 +43,7 @@ function UserView() {
     setLoading(true);
     try {
       const response = await axios.get(`http://localhost:5001/api/get_allfood_Groupitems`, { params: { query: categoryName } });
+      //Search for item and display items 
       setItems(response.data);
       setLoading(false);
     } catch (error) {
@@ -80,6 +82,7 @@ function UserView() {
   }
 
   const handleAddToCart = (itemName) => {
+    //Adds Items to cart and Update so Person array has item
     let current_Cart = Cart;
     let completed = false
     for (let i = 0; i < current_Cart.length; i++) {
@@ -141,5 +144,6 @@ function UserView() {
     </div>
   );
 }
+// Display the Array of Items and the quanitity that exist
 
 export default UserView;

@@ -8,8 +8,7 @@ function Orders() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchItems();
-    console.log(orderlist.data)
+    fetchItems(); //Gets items from Order list
   }, []);
 
   const fetchItems = async () => {
@@ -24,7 +23,7 @@ function Orders() {
     }
   };
 
-  if (loading) {
+  if (loading) { //Check if loading is true and display loading screen is true
     return <p className='loading-text'>Loading...</p>;
   }
 
@@ -66,5 +65,5 @@ function Orders() {
     </div>
   );
 }
-
+//Table that display a list of order with UFID associated with it along with quanitity
 export default Orders;

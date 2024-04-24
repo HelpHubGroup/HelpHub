@@ -17,6 +17,7 @@ function DeleteInfo() {
     const fetchUserData = async () => {
       try {   
         const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
+        //obtain local data
         console.log(response.data);
         setUserData(response.data);
         setUFID(userData[0].UFID)
@@ -28,7 +29,7 @@ function DeleteInfo() {
     };
 
     useEffect(() => {
-      fetchUserData();
+      fetchUserData();//when screen open call UserData()
     }, []);
 
     useEffect(() => {
@@ -44,7 +45,7 @@ function DeleteInfo() {
       }
   
       if (password !== confirmPass) {
-          setPasswordError('Passwords do not match');
+          setPasswordError('Passwords do not match'); // confirms password is correct
           return;
       }
   

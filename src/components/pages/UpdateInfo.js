@@ -20,6 +20,7 @@ function UpdateInfo() {
       try {   
         const response = await axios.get(`http://localhost:5001/api/getuser?query=${localStorage.getItem(Object.keys(localStorage)[0])}`);
         console.log(response.data);
+        //Fetches the User data based off the UFID that was inputted
         setUserData(response.data);
         setUFID(response.data[0].UFID)
         setCart(response.data[0].Cart)
@@ -35,6 +36,7 @@ function UpdateInfo() {
     }, []);
 
     const onButtonClick = async () => {
+        //Check that all inputs exist
       if (!firstName || !lastName || !password || !confirmPass) {
           setLastNameError('All fields are required');
           setPasswordError('All fields are required');
@@ -127,5 +129,5 @@ function UpdateInfo() {
       </div>
   );
 }
-
+//Display and check if student is able to change information of in there User Profile
 export default UpdateInfo;

@@ -2,6 +2,7 @@ import React from 'react';
 import './Gallery.css';
 
 function Gallery({ categories, onCategoryClick }) {
+  //Develop a gallery view that allow for button of all the categories that exist
   return (
     <div className='gallery-container'>
       {categories.map((category, index) => (

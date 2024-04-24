@@ -22,6 +22,7 @@ function SignUp() {
 
 
     const onButtonClick = async () => {
+      //Checks that all information exist
       if (!UFID || !First_Name || !Last_Name || !Password || !confirmPass || !Phone_Number) {
           setUFIDerror('All fields are required');
           setLastNameError('All fields are required');

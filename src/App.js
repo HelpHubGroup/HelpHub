@@ -4,8 +4,7 @@ import Navbar2 from './components/Navbar2';
 import './App.css';
 import Home from './components/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Services from './components/pages/Services';
-import Products from './components/pages/Products';
+
 import Login from './components/pages/Login';
 import SignUp from './components/pages/SignUp';
 import ProductView from './components/pages/ProductView';
@@ -34,8 +33,6 @@ function App() {
       {loggedIn ? <Navbar2 setIsLoggedIn={setIsLoggedIn} isEmployee={isEmployee} /> : <Navbar/>}
         <Routes>
         <Route path='/' exact element={ <Home />}/>
-          <Route path='/services' element={<Services />} />
-          <Route path='/products' element={<Products />} />
           <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} setisEmployee={setisEmployee} />} /> 
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/update-info' element={<UpdateInfo/>} />
