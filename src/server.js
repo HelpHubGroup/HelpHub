@@ -225,10 +225,10 @@ app.post('/api/postorder', async (req, res) => {
       const collection = database.collection("Orders");
 
       // Access UFID from request body
-      const userUFid = req.body.UFID;
+      const userUFid = req.body.UFid;
 
       // Check if a user with the same UFID already exists
-      const existingUser = await collection.findOne({ UFID: userUFid });
+      const existingUser = await collection.findOne({ UFid: userUFid });
       if (existingUser) {
           // If a user with the same UFID already exists, return an error response
           return res.status(400).send('User with the same UFID already exists');
