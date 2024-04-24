@@ -4,24 +4,24 @@ import axios from 'axios';
 
 function Orders() {
   const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
+  const [orderlist, setOrderlist] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get('http://localhost:5001/api/getallorders');
-        setOrders(response.data.data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-
     fetchItems();
   }, []);
+
+  const fetchItems = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('http://localhost:5001/api/getallorders');
+      setOrderlist(response.data);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return <p className='loading-text'>Loading...</p>;
@@ -34,6 +34,11 @@ function Orders() {
   return (
     <div className='user-view-container'>
       <div className='filter-text'>Orders</div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : orderlist.length === 0 ? (
+        <p>No items in cart</p>
+      ) : (
       <table className='items-table'>
         <thead>
           <tr>
@@ -43,15 +48,16 @@ function Orders() {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order, index) => (
+          {orderlist.data[0].Order.map((order, index) => (
             <tr key={index}>
-              <td>{order.UFid}</td> {/* Assuming UFid is a property of each order object */}
-              <td>{order.ItemName}</td> {/* Assuming ItemName is a property of each order object */}
-              <td>{order.Quantity}</td> {/* Assuming Quantity is a property of each order object */}
+              <td>{orderlist.data[0].UFid}</td> 
+              <td>{order[0]}</td>
+              <td>{order[1]}</td>
             </tr>
           ))}
         </tbody>
       </table>
+    )}
     </div>
   );
 }
