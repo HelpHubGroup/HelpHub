@@ -57,6 +57,7 @@ app.put('/api/update_user', async (req, res) => {
   try {
     const { UFID, firstName, lastName, password } = req.body;
 
+    //Requires input for update
     if (!UFID || (!firstName && !lastName && !password)) {
       return res.status(400).json({ error: 'UFID and at least one field to update are required.' });
     }
@@ -106,6 +107,7 @@ app.put('/api/update_employee', async (req, res) => {
     const database = client.db("HelpHub");
     const collection = database.collection("Employees");
 
+    // Requires input for update
     const filter = { Employee_id: Employee_id };
     const updateFields = {};
 
@@ -144,7 +146,7 @@ app.delete('/api/delete_user', async (req, res) => {
     const query = req.query.query;
 
     
-    // Use the query to find and delete the exact item
+    // Use the query to find and delete the exact user
     const result = await collection.deleteOne({ UFID: query });
     
     // Check if an item was deleted
@@ -171,7 +173,7 @@ app.delete('/api/delete_empolyee', async (req, res) => {
     const query = req.query.query;
 
     
-    // Use the query to find and delete the exact item
+    // Use the query to find and delete the exact employee
     const result = await collection.deleteOne({ Employee_id: query });
     
     // Check if an item was deleted
@@ -227,14 +229,14 @@ app.post('/api/postorder', async (req, res) => {
       // Access UFID from request body
       const userUFid = req.body.UFid;
 
-      // Check if a user with the same UFID already exists
+      // Check if a order with the same UFID already exists
       const existingUser = await collection.findOne({ UFid: userUFid });
       if (existingUser) {
-          // If a user with the same UFID already exists, return an error response
-          return res.status(400).send('User with the same UFID already exists');
+          // If a order with the same UFID already exists, return an error response
+          return res.status(400).send('Order with the same UFID already exists');
       }
 
-      // If no user with the same UFID exists, proceed to insert the new user
+      // If no order with the same UFID exists, proceed to insert the new order
       const newData = req.body;
       const result = await collection.insertOne(newData);
       console.log('Data inserted:', result.ops);
@@ -376,7 +378,6 @@ app.get('/api/getallorders', async (req, res) => {
     const database = client.db("HelpHub");
     const collection = database.collection("Orders");
 
-    // No need for a filter when returning all items
     const documents = await collection.find({}).toArray();
 
     // Respond with a success status and data
