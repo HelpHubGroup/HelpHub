@@ -74,6 +74,19 @@ function Cart() {
     } catch (error) {
       console.error('Error adding order:', error);
     }
+    try {
+      const cart_empty = [];
+      await axios.put(`http://localhost:5001/api/update_cart`, { 
+        UFID: UFID,
+        Cart: cart_empty});
+      console.log('Cart Emptied');
+      // Redirect to user view page after checkout
+      navigate('/user-view');
+    } catch (error) {
+      console.error('Error adding order:', error);
+    }
+
+
   };
 
   return (
